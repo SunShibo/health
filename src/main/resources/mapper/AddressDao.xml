@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.AddressDao">
+
+    <resultMap type="com.example.domain.Address" id="AddressMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="patId" column="patId" jdbcType="INTEGER"/>
+        <result property="pataddressType" column="PATAddressType" jdbcType="VARCHAR"/>
+        <result property="PATAddressDesc" column="PATAddressDesc" jdbcType="VARCHAR"/>
+        <result property="PATHouseNum" column="PATHouseNum" jdbcType="VARCHAR"/>
+        <result property="PATVillage" column="PATVillage" jdbcType="VARCHAR"/>
+        <result property="PATCountryside" column="PATCountryside" jdbcType="VARCHAR"/>
+        <result property="PATCountyCode" column="PATCountyCode" jdbcType="VARCHAR"/>
+        <result property="PATCountyDesc" column="PATCountyDesc" jdbcType="VARCHAR"/>
+        <result property="PATCityCode" column="PATCityCode" jdbcType="VARCHAR"/>
+        <result property="PATCityDesc" column="PATCityDesc" jdbcType="VARCHAR"/>
+        <result property="PATProvinceCode" column="PATProvinceCode" jdbcType="VARCHAR"/>
+        <result property="PATProvinceDesc" column="PATProvinceDesc" jdbcType="VARCHAR"/>
+        <result property="PATPostalCode" column="PATPostalCode" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="AddressMap">
+        select
+          id, patId, PATAddressType, PATAddressDesc, PATHouseNum, PATVillage, PATCountryside, PATCountyCode, PATCountyDesc, PATCityCode, PATCityDesc, PATProvinceCode, PATProvinceDesc, PATPostalCode
+        from hospital.address
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="AddressMap">
+        select
+          id, patId, PATAddressType, PATAddressDesc, PATHouseNum, PATVillage, PATCountryside, PATCountyCode, PATCountyDesc, PATCityCode, PATCityDesc, PATProvinceCode, PATProvinceDesc, PATPostalCode
+        from hospital.address
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="AddressMap">
+        select
+          id, patId, PATAddressType, PATAddressDesc, PATHouseNum, PATVillage, PATCountryside, PATCountyCode, PATCountyDesc, PATCityCode, PATCityDesc, PATProvinceCode, PATProvinceDesc, PATPostalCode
+        from hospital.address
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="patId != null">
+                and patId = #{patId}
+            </if>
+            <if test="PATAddressType != null and PATAddressType != ''">
+                and PATAddressType = #{PATAddressType}
+            </if>
+            <if test="PATAddressDesc != null and PATAddressDesc != ''">
+                and PATAddressDesc = #{PATAddressDesc}
+            </if>
+            <if test="PATHouseNum != null and PATHouseNum != ''">
+                and PATHouseNum = #{PATHouseNum}
+            </if>
+            <if test="PATVillage != null and PATVillage != ''">
+                and PATVillage = #{PATVillage}
+            </if>
+            <if test="PATCountryside != null and PATCountryside != ''">
+                and PATCountryside = #{PATCountryside}
+            </if>
+            <if test="PATCountyCode != null and PATCountyCode != ''">
+                and PATCountyCode = #{PATCountyCode}
+            </if>
+            <if test="PATCountyDesc != null and PATCountyDesc != ''">
+                and PATCountyDesc = #{PATCountyDesc}
+            </if>
+            <if test="PATCityCode != null and PATCityCode != ''">
+                and PATCityCode = #{PATCityCode}
+            </if>
+            <if test="PATCityDesc != null and PATCityDesc != ''">
+                and PATCityDesc = #{PATCityDesc}
+            </if>
+            <if test="PATProvinceCode != null and PATProvinceCode != ''">
+                and PATProvinceCode = #{PATProvinceCode}
+            </if>
+            <if test="PATProvinceDesc != null and PATProvinceDesc != ''">
+                and PATProvinceDesc = #{PATProvinceDesc}
+            </if>
+            <if test="PATPostalCode != null and PATPostalCode != ''">
+                and PATPostalCode = #{PATPostalCode}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into hospital.address(patId, PATAddressType, PATAddressDesc, PATHouseNum, PATVillage, PATCountryside, PATCountyCode, PATCountyDesc, PATCityCode, PATCityDesc, PATProvinceCode, PATProvinceDesc, PATPostalCode)
+        values (#{patId}, #{PATAddressType}, #{PATAddressDesc}, #{PATHouseNum}, #{PATVillage}, #{PATCountryside}, #{PATCountyCode}, #{PATCountyDesc}, #{PATCityCode}, #{PATCityDesc}, #{PATProvinceCode}, #{PATProvinceDesc}, #{PATPostalCode})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update hospital.address
+        <set>
+            <if test="patId != null">
+                patId = #{patId},
+            </if>
+            <if test="PATAddressType != null and PATAddressType != ''">
+                PATAddressType = #{PATAddressType},
+            </if>
+            <if test="PATAddressDesc != null and PATAddressDesc != ''">
+                PATAddressDesc = #{PATAddressDesc},
+            </if>
+            <if test="PATHouseNum != null and PATHouseNum != ''">
+                PATHouseNum = #{PATHouseNum},
+            </if>
+            <if test="PATVillage != null and PATVillage != ''">
+                PATVillage = #{PATVillage},
+            </if>
+            <if test="PATCountryside != null and PATCountryside != ''">
+                PATCountryside = #{PATCountryside},
+            </if>
+            <if test="PATCountyCode != null and PATCountyCode != ''">
+                PATCountyCode = #{PATCountyCode},
+            </if>
+            <if test="PATCountyDesc != null and PATCountyDesc != ''">
+                PATCountyDesc = #{PATCountyDesc},
+            </if>
+            <if test="PATCityCode != null and PATCityCode != ''">
+                PATCityCode = #{PATCityCode},
+            </if>
+            <if test="PATCityDesc != null and PATCityDesc != ''">
+                PATCityDesc = #{PATCityDesc},
+            </if>
+            <if test="PATProvinceCode != null and PATProvinceCode != ''">
+                PATProvinceCode = #{PATProvinceCode},
+            </if>
+            <if test="PATProvinceDesc != null and PATProvinceDesc != ''">
+                PATProvinceDesc = #{PATProvinceDesc},
+            </if>
+            <if test="PATPostalCode != null and PATPostalCode != ''">
+                PATPostalCode = #{PATPostalCode},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from hospital.address where id = #{id}
+    </delete>
+
+</mapper>

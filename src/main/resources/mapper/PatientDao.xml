@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.PatientDao">
+
+    <resultMap type="com.example.domain.Patient" id="PatientMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="sourcesystem" column="SourceSystem" jdbcType="VARCHAR"/>
+        <result property="messageid" column="MessageID" jdbcType="VARCHAR"/>
+        <result property="patpatientid" column="PATPatientID" jdbcType="VARCHAR"/>
+        <result property="patpatientname" column="PATPatientName" jdbcType="VARCHAR"/>
+        <result property="patdob" column="PATDob" jdbcType="TIMESTAMP"/>
+        <result property="patage" column="PATAge" jdbcType="VARCHAR"/>
+        <result property="patsexcode" column="PATSexCode" jdbcType="VARCHAR"/>
+        <result property="patsexdesc" column="PATSexDesc" jdbcType="VARCHAR"/>
+        <result property="patmaritalstatuscode" column="PATMaritalStatusCode" jdbcType="VARCHAR"/>
+        <result property="patmaritalstatusdesc" column="PATMaritalStatusDesc" jdbcType="VARCHAR"/>
+        <result property="patnationcode" column="PATNationCode" jdbcType="VARCHAR"/>
+        <result property="patnationdesc" column="PATNationDesc" jdbcType="VARCHAR"/>
+        <result property="patcountrycode" column="PATCountryCode" jdbcType="VARCHAR"/>
+        <result property="patcountrydesc" column="PATCountryDesc" jdbcType="VARCHAR"/>
+        <result property="patdeceaseddate" column="PATDeceasedDate" jdbcType="TIMESTAMP"/>
+        <result property="patdeceasedtime" column="PATDeceasedTime" jdbcType="OTHER"/>
+        <result property="pathealthcardid" column="PATHealthCardID" jdbcType="VARCHAR"/>
+        <result property="patmotherid" column="PATMotherID" jdbcType="VARCHAR"/>
+        <result property="patoccupationcode" column="PATOccupationCode" jdbcType="VARCHAR"/>
+        <result property="patoccupationdesc" column="PATOccupationDesc" jdbcType="VARCHAR"/>
+        <result property="patworkplacename" column="PATWorkPlaceName" jdbcType="VARCHAR"/>
+        <result property="patworkplacetelnum" column="PATWorkPlaceTelNum" jdbcType="VARCHAR"/>
+        <result property="pattelephone" column="PATTelephone" jdbcType="VARCHAR"/>
+        <result property="patremarks" column="PATRemarks" jdbcType="VARCHAR"/>
+        <result property="updateusercode" column="UpdateUserCode" jdbcType="VARCHAR"/>
+        <result property="updateuserdesc" column="UpdateUserDesc" jdbcType="VARCHAR"/>
+        <result property="updatedate" column="UpdateDate" jdbcType="TIMESTAMP"/>
+        <result property="updatetime" column="UpdateTime" jdbcType="OTHER"/>
+        <result property="businessfieldcode" column="BusinessFieldCode" jdbcType="VARCHAR"/>
+        <result property="hospitalcode" column="HospitalCode" jdbcType="VARCHAR"/>
+        <result property="patdocumentno" column="PATDocumentNo" jdbcType="VARCHAR"/>
+        <result property="hospital" column="Hospital" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+    <!--新增所有列-->
+    <insert id="insert"  keyProperty="id" useGeneratedKeys="true">
+        insert into hospital.patient(SourceSystem, MessageID, PATPatientID, PATPatientName, PATDob, PATAge, PATSexCode, PATSexDesc, PATMaritalStatusCode, PATMaritalStatusDesc, PATNationCode, PATNationDesc, PATCountryCode, PATCountryDesc, PATDeceasedDate, PATDeceasedTime, PATHealthCardID, PATMotherID, PATOccupationCode, PATOccupationDesc, PATWorkPlaceName, PATWorkPlaceTelNum, PATTelephone, PATRemarks, UpdateUserCode, UpdateUserDesc, UpdateDate, UpdateTime, BusinessFieldCode, HospitalCode, PATDocumentNo, Hospital)
+        values (#{sourcesystem}, #{messageid}, #{patpatientid}, #{patpatientname}, #{patdob}, #{patage}, #{patsexcode}, #{patsexdesc}, #{patmaritalstatuscode}, #{patmaritalstatusdesc}, #{patnationcode}, #{patnationdesc}, #{patcountrycode}, #{patcountrydesc}, #{patdeceaseddate}, #{patdeceasedtime}, #{pathealthcardid}, #{patmotherid}, #{patoccupationcode}, #{patoccupationdesc}, #{patworkplacename}, #{patworkplacetelnum}, #{pattelephone}, #{patremarks}, #{updateusercode}, #{updateuserdesc}, #{updatedate}, #{updatetime}, #{businessfieldcode}, #{hospitalcode}, #{patdocumentno}, #{hospital})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update hospital.patient
+        <set>
+            <if test="sourcesystem != null and sourcesystem != ''">
+                SourceSystem = #{sourcesystem},
+            </if>
+            <if test="messageid != null and messageid != ''">
+                MessageID = #{messageid},
+            </if>
+            <if test="patpatientid != null and patpatientid != ''">
+                PATPatientID = #{patpatientid},
+            </if>
+            <if test="patpatientname != null and patpatientname != ''">
+                PATPatientName = #{patpatientname},
+            </if>
+            <if test="patdob != null">
+                PATDob = #{patdob},
+            </if>
+            <if test="patage != null and patage != ''">
+                PATAge = #{patage},
+            </if>
+            <if test="patsexcode != null and patsexcode != ''">
+                PATSexCode = #{patsexcode},
+            </if>
+            <if test="patsexdesc != null and patsexdesc != ''">
+                PATSexDesc = #{patsexdesc},
+            </if>
+            <if test="patmaritalstatuscode != null and patmaritalstatuscode != ''">
+                PATMaritalStatusCode = #{patmaritalstatuscode},
+            </if>
+            <if test="patmaritalstatusdesc != null and patmaritalstatusdesc != ''">
+                PATMaritalStatusDesc = #{patmaritalstatusdesc},
+            </if>
+            <if test="patnationcode != null and patnationcode != ''">
+                PATNationCode = #{patnationcode},
+            </if>
+            <if test="patnationdesc != null and patnationdesc != ''">
+                PATNationDesc = #{patnationdesc},
+            </if>
+            <if test="patcountrycode != null and patcountrycode != ''">
+                PATCountryCode = #{patcountrycode},
+            </if>
+            <if test="patcountrydesc != null and patcountrydesc != ''">
+                PATCountryDesc = #{patcountrydesc},
+            </if>
+            <if test="patdeceaseddate != null">
+                PATDeceasedDate = #{patdeceaseddate},
+            </if>
+            <if test="patdeceasedtime != null">
+                PATDeceasedTime = #{patdeceasedtime},
+            </if>
+            <if test="pathealthcardid != null and pathealthcardid != ''">
+                PATHealthCardID = #{pathealthcardid},
+            </if>
+            <if test="patmotherid != null and patmotherid != ''">
+                PATMotherID = #{patmotherid},
+            </if>
+            <if test="patoccupationcode != null and patoccupationcode != ''">
+                PATOccupationCode = #{patoccupationcode},
+            </if>
+            <if test="patoccupationdesc != null and patoccupationdesc != ''">
+                PATOccupationDesc = #{patoccupationdesc},
+            </if>
+            <if test="patworkplacename != null and patworkplacename != ''">
+                PATWorkPlaceName = #{patworkplacename},
+            </if>
+            <if test="patworkplacetelnum != null and patworkplacetelnum != ''">
+                PATWorkPlaceTelNum = #{patworkplacetelnum},
+            </if>
+            <if test="pattelephone != null and pattelephone != ''">
+                PATTelephone = #{pattelephone},
+            </if>
+            <if test="patremarks != null and patremarks != ''">
+                PATRemarks = #{patremarks},
+            </if>
+            <if test="updateusercode != null and updateusercode != ''">
+                UpdateUserCode = #{updateusercode},
+            </if>
+            <if test="updateuserdesc != null and updateuserdesc != ''">
+                UpdateUserDesc = #{updateuserdesc},
+            </if>
+            <if test="updatedate != null">
+                UpdateDate = #{updatedate},
+            </if>
+            <if test="updatetime != null">
+                UpdateTime = #{updatetime},
+            </if>
+            <if test="businessfieldcode != null and businessfieldcode != ''">
+                BusinessFieldCode = #{businessfieldcode},
+            </if>
+            <if test="hospitalcode != null and hospitalcode != ''">
+                HospitalCode = #{hospitalcode},
+            </if>
+            <if test="patdocumentno != null and patdocumentno != ''">
+                PATDocumentNo = #{patdocumentno},
+            </if>
+            <if test="hospital != null and hospital != ''">
+                Hospital = #{hospital},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from hospital.patient where id = #{id}
+    </delete>
+
+
+
+
+</mapper>

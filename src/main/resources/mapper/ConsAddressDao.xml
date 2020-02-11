@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.ConsAddressDao">
+
+    <resultMap type="com.example.domain.ConsAddress" id="ConsAddressMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="contsId" column="contsId" jdbcType="INTEGER"/>
+        <result property="PATRelationAddressDesc" column="PATRelationAddressDesc" jdbcType="VARCHAR"/>
+        <result property="PATRelationHouseNum" column="PATRelationHouseNum" jdbcType="VARCHAR"/>
+        <result property="PATRelationVillage" column="PATRelationVillage" jdbcType="VARCHAR"/>
+        <result property="PATRelationCountryside" column="PATRelationCountryside" jdbcType="VARCHAR"/>
+        <result property="PATRelationCountyCode" column="PATRelationCountyCode" jdbcType="VARCHAR"/>
+        <result property="PATRelationCountyDesc" column="PATRelationCountyDesc" jdbcType="VARCHAR"/>
+        <result property="PATRelationCityCode" column="PATRelationCityCode" jdbcType="VARCHAR"/>
+        <result property="PATRelationCityDesc" column="PATRelationCityDesc" jdbcType="VARCHAR"/>
+        <result property="PATRelationProvinceCode" column="PATRelationProvinceCode" jdbcType="VARCHAR"/>
+        <result property="PATRelationProvinceDesc" column="PATRelationProvinceDesc" jdbcType="VARCHAR"/>
+        <result property="PATRelationPostalCode" column="PATRelationPostalCode" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="ConsAddressMap">
+        select
+          id, contsId, PATRelationAddressDesc, PATRelationHouseNum, PATRelationVillage, PATRelationCountryside, PATRelationCountyCode, PATRelationCountyDesc, PATRelationCityCode, PATRelationCityDesc, PATRelationProvinceCode, PATRelationProvinceDesc, PATRelationPostalCode
+        from hospital.cons_address
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="ConsAddressMap">
+        select
+          id, contsId, PATRelationAddressDesc, PATRelationHouseNum, PATRelationVillage, PATRelationCountryside, PATRelationCountyCode, PATRelationCountyDesc, PATRelationCityCode, PATRelationCityDesc, PATRelationProvinceCode, PATRelationProvinceDesc, PATRelationPostalCode
+        from hospital.cons_address
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="ConsAddressMap">
+        select
+          id, contsId, PATRelationAddressDesc, PATRelationHouseNum, PATRelationVillage, PATRelationCountryside, PATRelationCountyCode, PATRelationCountyDesc, PATRelationCityCode, PATRelationCityDesc, PATRelationProvinceCode, PATRelationProvinceDesc, PATRelationPostalCode
+        from hospital.cons_address
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="contsId != null">
+                and contsId = #{contsId}
+            </if>
+            <if test="PATRelationAddressDesc != null and PATRelationAddressDesc != ''">
+                and PATRelationAddressDesc = #{PATRelationAddressDesc}
+            </if>
+            <if test="PATRelationHouseNum != null and PATRelationHouseNum != ''">
+                and PATRelationHouseNum = #{PATRelationHouseNum}
+            </if>
+            <if test="PATRelationVillage != null and PATRelationVillage != ''">
+                and PATRelationVillage = #{PATRelationVillage}
+            </if>
+            <if test="PATRelationCountryside != null and PATRelationCountryside != ''">
+                and PATRelationCountryside = #{PATRelationCountryside}
+            </if>
+            <if test="PATRelationCountyCode != null and PATRelationCountyCode != ''">
+                and PATRelationCountyCode = #{PATRelationCountyCode}
+            </if>
+            <if test="PATRelationCountyDesc != null and PATRelationCountyDesc != ''">
+                and PATRelationCountyDesc = #{PATRelationCountyDesc}
+            </if>
+            <if test="PATRelationCityCode != null and PATRelationCityCode != ''">
+                and PATRelationCityCode = #{PATRelationCityCode}
+            </if>
+            <if test="PATRelationCityDesc != null and PATRelationCityDesc != ''">
+                and PATRelationCityDesc = #{PATRelationCityDesc}
+            </if>
+            <if test="PATRelationProvinceCode != null and PATRelationProvinceCode != ''">
+                and PATRelationProvinceCode = #{PATRelationProvinceCode}
+            </if>
+            <if test="PATRelationProvinceDesc != null and PATRelationProvinceDesc != ''">
+                and PATRelationProvinceDesc = #{PATRelationProvinceDesc}
+            </if>
+            <if test="PATRelationPostalCode != null and PATRelationPostalCode != ''">
+                and PATRelationPostalCode = #{PATRelationPostalCode}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into hospital.cons_address(contsId, PATRelationAddressDesc, PATRelationHouseNum, PATRelationVillage, PATRelationCountryside, PATRelationCountyCode, PATRelationCountyDesc, PATRelationCityCode, PATRelationCityDesc, PATRelationProvinceCode, PATRelationProvinceDesc, PATRelationPostalCode)
+        values (#{contsId}, #{PATRelationAddressDesc}, #{PATRelationHouseNum}, #{PATRelationVillage}, #{PATRelationCountryside}, #{PATRelationCountyCode}, #{PATRelationCountyDesc}, #{PATRelationCityCode}, #{PATRelationCityDesc}, #{PATRelationProvinceCode}, #{PATRelationProvinceDesc}, #{PATRelationPostalCode})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update hospital.cons_address
+        <set>
+            <if test="contsId != null">
+                contsId = #{contsId},
+            </if>
+            <if test="PATRelationAddressDesc != null and PATRelationAddressDesc != ''">
+                PATRelationAddressDesc = #{PATRelationAddressDesc},
+            </if>
+            <if test="PATRelationHouseNum != null and PATRelationHouseNum != ''">
+                PATRelationHouseNum = #{PATRelationHouseNum},
+            </if>
+            <if test="PATRelationVillage != null and PATRelationVillage != ''">
+                PATRelationVillage = #{PATRelationVillage},
+            </if>
+            <if test="PATRelationCountryside != null and PATRelationCountryside != ''">
+                PATRelationCountryside = #{PATRelationCountryside},
+            </if>
+            <if test="PATRelationCountyCode != null and PATRelationCountyCode != ''">
+                PATRelationCountyCode = #{PATRelationCountyCode},
+            </if>
+            <if test="PATRelationCountyDesc != null and PATRelationCountyDesc != ''">
+                PATRelationCountyDesc = #{PATRelationCountyDesc},
+            </if>
+            <if test="PATRelationCityCode != null and PATRelationCityCode != ''">
+                PATRelationCityCode = #{PATRelationCityCode},
+            </if>
+            <if test="PATRelationCityDesc != null and PATRelationCityDesc != ''">
+                PATRelationCityDesc = #{PATRelationCityDesc},
+            </if>
+            <if test="PATRelationProvinceCode != null and PATRelationProvinceCode != ''">
+                PATRelationProvinceCode = #{PATRelationProvinceCode},
+            </if>
+            <if test="PATRelationProvinceDesc != null and PATRelationProvinceDesc != ''">
+                PATRelationProvinceDesc = #{PATRelationProvinceDesc},
+            </if>
+            <if test="PATRelationPostalCode != null and PATRelationPostalCode != ''">
+                PATRelationPostalCode = #{PATRelationPostalCode},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from hospital.cons_address where id = #{id}
+    </delete>
+
+</mapper>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.CertificateDao">
+
+    <resultMap type="com.example.domain.Certificates" id="CertificateMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="patid" column="patId" jdbcType="INTEGER"/>
+        <result property="patidentitynum" column="PATIdentityNum" jdbcType="VARCHAR"/>
+        <result property="patidtypecode" column="PATIdTypeCode" jdbcType="VARCHAR"/>
+        <result property="patidtypedesc" column="PATIdTypeDesc" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="CertificateMap">
+        select
+          id, patId, PATIdentityNum, PATIdTypeCode, PATIdTypeDesc
+        from hospital.certificate
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="CertificateMap">
+        select
+          id, patId, PATIdentityNum, PATIdTypeCode, PATIdTypeDesc
+        from hospital.certificate
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="CertificateMap">
+        select
+          id, patId, PATIdentityNum, PATIdTypeCode, PATIdTypeDesc
+        from hospital.certificate
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="patid != null">
+                and patId = #{patid}
+            </if>
+            <if test="patidentitynum != null and patidentitynum != ''">
+                and PATIdentityNum = #{patidentitynum}
+            </if>
+            <if test="patidtypecode != null and patidtypecode != ''">
+                and PATIdTypeCode = #{patidtypecode}
+            </if>
+            <if test="patidtypedesc != null and patidtypedesc != ''">
+                and PATIdTypeDesc = #{patidtypedesc}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into hospital.certificate(patId, PATIdentityNum, PATIdTypeCode, PATIdTypeDesc)
+        values (#{patid}, #{patidentitynum}, #{patidtypecode}, #{patidtypedesc})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update hospital.certificate
+        <set>
+            <if test="patid != null">
+                patId = #{patid},
+            </if>
+            <if test="patidentitynum != null and patidentitynum != ''">
+                PATIdentityNum = #{patidentitynum},
+            </if>
+            <if test="patidtypecode != null and patidtypecode != ''">
+                PATIdTypeCode = #{patidtypecode},
+            </if>
+            <if test="patidtypedesc != null and patidtypedesc != ''">
+                PATIdTypeDesc = #{patidtypedesc},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from hospital.certificate where id = #{id}
+    </delete>
+
+</mapper>
