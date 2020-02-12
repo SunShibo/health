@@ -16,7 +16,8 @@ public class CxfClient {
     public static void cl1() {
         try {
             // 接口地址
-            String address = "http://localhost:13001/services/CommonService?wsdl";
+           String address = "http://123.56.71.194:13001/services/CommonService?wsdl";
+            // String address = "http://localhost:13001/services/CommonService?wsdl";
             // 代理工厂
             JaxWsProxyFactoryBean jaxWsProxyFactoryBean = new JaxWsProxyFactoryBean();
             // 设置代理地址
@@ -113,7 +114,7 @@ public class CxfClient {
                     "</Request>\n"  ;
             String userName = "<xml>测试</xml>";
             // 调用代理接口的方法调用并返回结果
-            String result = cs.synPatient(xmlStr);
+            String result = cs.synPatient("T0004",xmlStr);
           System.out.println("返回结果:" + result);
         } catch (Exception e) {
             e.printStackTrace();

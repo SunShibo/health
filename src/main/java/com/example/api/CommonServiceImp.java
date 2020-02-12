@@ -3,6 +3,7 @@ package com.example.api;
 import javax.annotation.Resource;
 import javax.jws.WebService;
 
+import com.alibaba.druid.util.StringUtils;
 import com.example.domain.Patient;
 import com.example.domain.ResponseBuild;
 import com.example.service.PatientService;
@@ -27,10 +28,18 @@ public class CommonServiceImp implements CommonService {
     private PatientService  patientService;
 
     @Override
-    public String synPatient(String param) {
+    public String synPatient(String code,String param) {
+        if(StringUtils.isEmpty(code) || StringUtils.isEmpty(param) ){
+            return ResponseBuild.failure("参数异常");
+        }
+
         String  result = null;
         try {
-            result = patientService.insert(param);
+            if(code.equals("T0004")) {
+                result = patientService.insert(param);
+            }else{
+                return ResponseBuild.failure("没有找到接口代码");
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return  ResponseBuild.failure("发生异常");

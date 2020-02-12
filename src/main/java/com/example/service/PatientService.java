@@ -36,9 +36,7 @@ import java.util.List;
      * @return 实例对象
      */
     public String insert(String param) throws Exception {
-        if(StringUtils.isEmpty(param)){
-            return ResponseBuild.failure("参数异常");
-        }
+
 
             Request request = XmlUtils.xmlToObject(Request.class, param);
             //插入患者基本信息

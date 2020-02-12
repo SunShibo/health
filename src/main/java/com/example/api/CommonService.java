@@ -17,6 +17,6 @@ import javax.jws.WebService;
 public interface CommonService {
     @WebMethod()
     @WebResult(name = "String", targetNamespace = "")
-    public String synPatient(@WebParam(name = "param") String param);
+    public String synPatient(String code,String param);
  
 }
