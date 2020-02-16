@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.DivisionDao">
+
+    <insert id="insert" parameterType="com.example.receive.DivisionRequest" >
+        INSERT INTO `hospital`.`division` (
+        `SourceSystem`,
+        `MessageID`,
+        `CTD_Code`,
+        `CTD_Desc`,
+        `CTD_CategoryCode`,
+        `CTD_Phonetic`,
+        `CTD_WardFlag`,
+        `BusinessFieldCode`,
+        `CTD_CreatDate`,
+        `CTD_CreatTime`,
+        `CTD_UpdateDate`,
+        `CTD_UpdateTime`,
+        `CTD_OriginalCode`,
+        `CTD_OriginalDesc`,
+        `CTD_Remarks`,
+        `CTD_StartDate`,
+        `CTD_EndDate`,
+        `CTD_CodesystemCode`,
+        `CTD_OfficeAddress`,
+        `CTD_OfficePhone`,
+        `CTD_UpdateUserCode`,
+        `CTD_HosCode`,
+        `CTD_DepartmentGroup`,
+        `CTD_AdmType`,
+        `CTD_ParentCode`,
+        `CTD_Status`
+        )
+        VALUES
+        (
+        #{SourceSystem},
+        #{MessageID},
+        #{CTD_Code},
+        #{CTD_Desc},
+        #{CTD_CategoryCode},
+        #{CTD_Phonetic},
+        #{CTD_WardFlag},
+        #{BusinessFieldCode},
+        #{CTD_CreatDate},
+        #{CTD_CreatTime},
+        #{CTD_UpdateDate},
+        #{CTD_UpdateTime},
+        #{CTD_OriginalCode},
+        #{CTD_OriginalDesc},
+        #{CTD_Remarks},
+        #{CTD_StartDate},
+        #{CTD_EndDate},
+        #{CTD_CodesystemCode},
+        #{CTD_OfficeAddress},
+        #{CTD_OfficePhone},
+        #{CTD_UpdateUserCode},
+        #{CTD_HosCode},
+        #{CTD_DepartmentGroup},
+        #{CTD_AdmType},
+        #{CTD_ParentCode},
+        #{CTD_Status}
+        ) ;
+
+
+    </insert>
+
+</mapper>

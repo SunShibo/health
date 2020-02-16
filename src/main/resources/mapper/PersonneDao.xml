@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.PersonneDao">
+
+    <insert id="insert" parameterType="com.example.receive.PersonnelRequest" >
+        INSERT INTO `hospital`.`personnel` (
+        `SourceSystem`,
+        `MessageID`,
+        `CTCP_Code`,
+        `CTCP_JobNumber`,
+        `CTCP_Desc`,
+        `CTCP_Name`,
+        `CTCP_Spell`,
+        `CTCP_SexCode`,
+        `CTCP_BirthDate`,
+        `CTCP_IDCardNO`,
+        `CTCP_TitleOfTechCode`,
+        `CTCP_StaffTypeCode`,
+        `CTCP_CareProvPositionCode`,
+        `CTCP_CareProvTypeCode`,
+        `CTCP_DeptCode`,
+        `CTCP_BirthPlace`,
+        `CTCP_CodesystemCode`,
+        `CTCP_Remarks`,
+        `CTCP_ExtranetURL`,
+        `CTCP_PassWord`,
+        `CTCP_UpdateUserCode`,
+        `CTCP_CreatDate`,
+        `CTCP_CreatTime`,
+        `BusinessFieldCode`,
+        `CTCP_OriginalCode`,
+        `CTCP_OriginalDesc`,
+        `CTCP_StartDate`,
+        `CTCP_EndDate`,
+        `CTCP_HosCode`,
+        `CTCP_Status`
+        )
+        VALUES
+        (
+        #{SourceSystem},
+        #{MessageID},
+        #{CTCP_Code},
+        #{CTCP_JobNumber},
+        #{CTCP_Desc},
+        #{CTCP_Name},
+        #{CTCP_Spell},
+        #{CTCP_SexCode},
+        #{CTCP_BirthDate},
+        #{CTCP_IDCardNO},
+        #{CTCP_TitleOfTechCode},
+        #{CTCP_StaffTypeCode},
+        #{CTCP_CareProvPositionCode},
+        #{CTCP_CareProvTypeCode},
+        #{CTCP_DeptCode},
+        #{CTCP_BirthPlace},
+        #{CTCP_CodesystemCode},
+        #{CTCP_Remarks},
+        #{CTCP_ExtranetURL},
+        #{CTCP_PassWord},
+        #{CTCP_UpdateUserCode},
+        #{CTCP_CreatDate},
+        #{CTCP_CreatTime},
+        #{BusinessFieldCode},
+        #{CTCP_OriginalCode},
+        #{CTCP_OriginalDesc},
+        #{CTCP_StartDate},
+        #{CTCP_EndDate},
+        #{CTCP_HosCode},
+        #{CTCP_Status}
+        ) ;
+
+
+
+    </insert>
+
+</mapper>
