@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.PhysicalDAO">
+
+    <delete id="delPhysical" parameterType="java.lang.Long">
+        delete from physical where patId=#{PATPatientID}
+    </delete>
+
+    <insert id="addPhysical" parameterType="com.example.domain.Physical">
+        insert into physical
+        (SourceSystem,MessageID,PATPATPatientName,SexDesc,
+        PATAge,MedExamDate,MedExamID,
+        MedExamReportStatus,MedExamStatus,
+        MedExamReservationDate,patId)
+        values
+        <foreach collection="physicalList" item="item" index="index" open="" close="" separator=",">
+            (#{item.SourceSystem},#{item.MessageID},#{item.PATPATPatientName},#{item.SexDesc},
+            #{item.PATAge},#{item.MedExamDate},#{item.MedExamID},
+            #{item.MedExamReportStatus},#{item.MedExamStatus},
+            #{item.MedExamReservationDate},#{item.patId})
+        </foreach>
+
+    </insert>
+
+    <delete id="delSuggests" parameterType="java.lang.Long">
+        delete from suggest where phyId=#{MedExamID}
+    </delete>
+    <insert id="addSuggests" parameterType="com.example.domain.Suggest">
+        insert into suggest
+        (SourceSystem,MessageID,MedExamSummary,MedExamSummaryDoctor,
+        MedExamSummaryDate,MedExamAuditDoctor,MedExamAuditDate,phyId)
+        values
+        <foreach collection="suggests" item="item" index="index" open="" close="" separator=",">
+            (#{item.SourceSystem},#{item.MessageID},#{item.MedExamSummary},#{item.MedExamSummaryDoctor},
+            #{item.MedExamSummaryDate},#{item.MedExamAuditDoctor},#{item.MedExamAuditDate},#{item.phyId})
+        </foreach>
+    </insert>
+
+    <delete id="delConsequence" parameterType="java.lang.Long">
+        delete from consequence where phyId=#{MedExamID}
+    </delete>
+    <insert id="addConsequence" parameterType="com.example.domain.Consequence">
+        insert into consequence
+        (SourceSystem,MessageID,ResultCode,Total,MedExamItemDesc,
+        MedExamItemID,MedExamItemFormat,MedExamItemDoctor,MedExamItemDate,MedExamItemStationCode,
+        MedExamItemStationName,patId,IsFirst,IsLast,MedExamExceptionTip,phyId)
+        values
+        <foreach collection="consequences" item="item" index="index" open="" close="" separator=",">
+            (#{item.SourceSystem},#{item.MessageID},#{item.ResultCode},#{item.Total},#{item.MedExamItemDesc},
+            #{item.MedExamItemID},#{item.MedExamItemFormat},#{item.MedExamItemDoctor},#{item.MedExamItemDate},#{item.MedExamItemStationCode},
+            #{item.MedExamItemStationName},#{item.patId},#{item.IsFirst},#{item.IsLast},#{item.MedExamExceptionTip},#{item.phyId})
+        </foreach>
+    </insert>
+
+    <delete id="delPhysicalConse" parameterType="java.lang.Long">
+        delete from physical_conse where conId=#{conId}
+    </delete>
+    <insert id="addPhysicalConse" parameterType="com.example.domain.PhysicalConse">
+        insert into physical_conse
+        (MedExamContentDesc,MedExamContentResult,MedExamContentUnit,MedExamContentRange,conId)
+        values
+        <foreach collection="physicalConseList" item="item" index="index" open="" close="" separator=",">
+            (#{item.MedExamContentDesc},#{item.MedExamContentResult},#{item.MedExamContentUnit},#{item.MedExamContentRange},#{item.conId})
+        </foreach>
+    </insert>
+</mapper>

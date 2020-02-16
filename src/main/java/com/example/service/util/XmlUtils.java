@@ -1,6 +1,8 @@
 package com.example.service.util;
 
 import com.example.domain.Request;
+import com.example.domain.Response;
+import org.apache.logging.log4j.util.Strings;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -57,8 +59,34 @@ public class XmlUtils {
     }
 
 
-
     public static void main(String[] args){
+        String string="<Response>\n" +
+                "    <Header>\n" +
+                "        <SourceSystem></SourceSystem>\n" +
+                "        <MessageID></MessageID>\n" +
+                "    </Header>\n" +
+                "    <Body>\n" +
+                "        <ResultCode>0</ResultCode>\n" +
+                "        <ResultContent>成功</ResultContent>\n" +
+                "        <MedExamRp>\n" +
+                "            <MedExamItem>\n" +
+                "                <PATPATPatientName>mic1</PATPATPatientName>\n" +
+                "                <SexDesc>男</SexDesc>\n" +
+                "                <PATAge>27</PATAge>\n" +
+                "                <MedExamDate>2016-10-20</MedExamDate>\n" +
+                "                <MedExamID>1163</MedExamID>\n" +
+                "                <MedExamReportStatus>已打印</MedExamReportStatus>\n" +
+                "                <MedExamStatus>到达</MedExamStatus>\n" +
+                "                <MedExamReservationDate>2016-10-13</MedExamReservationDate>\n" +
+                "            </MedExamItem>\n" +
+                "        </MedExamRp>\n" +
+                "    </Body>\n" +
+                "</Response>\n";
+        Response r= XmlUtils.xmlToObject(Response.class,string);
+        System.err.println(r.getBody().getMedExamRp().getPhysicalsList().size());
+        System.err.println(r.getBody().getMedExamRp().getPhysicalsList().get(0).getPATPATPatientName());
+    }
+    public static void main2(String[] args){
         String xmlStr="<Request>\n" +
                 "    <Header>\n" +
                 "        <SourceSystem>02</SourceSystem>\n" +
@@ -147,6 +175,6 @@ public class XmlUtils {
 
 
         Request request = XmlUtils.xmlToObject(Request.class, xmlStr);
-        System.out.println(request);
+        System.out.println(request.getBody().getPatientRegistryRt().getHospitalcode());
     }
 }
