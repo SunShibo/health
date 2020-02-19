@@ -18,6 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 public interface CommonService {
     @WebMethod()
     @WebResult(name = "String", targetNamespace = "")
-    public String synPatient(String code, String param, HttpServletRequest request);
+    public String synPatient(String code, String param);
  
 }
