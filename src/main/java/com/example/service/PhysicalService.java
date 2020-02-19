@@ -32,38 +32,6 @@ public class PhysicalService {
                 "</Request>\n";
         //远程调用，获取到xml数据
         String result=this.sendWebService(xmlStr,"BOE0074");
-        result="<Response>\n" +
-                "    <Header>\n" +
-                "        <SourceSystem>"+SourceSystem+"</SourceSystem>\n" +
-                "        <MessageID>"+MessageID+"</MessageID>\n" +
-                "    </Header>\n" +
-                "    <Body>\n" +
-                "        <ResultCode>0</ResultCode>\n" +
-                "        <ResultContent>成功</ResultContent>\n" +
-                "        <MedExamRp>\n" +
-                "            <MedExamItem>\n" +
-                "                <PATPATPatientName>mic1</PATPATPatientName>\n" +
-                "                <SexDesc>男</SexDesc>\n" +
-                "                <PATAge>27</PATAge>\n" +
-                "                <MedExamDate>2016-10-20</MedExamDate>\n" +
-                "                <MedExamID>1163</MedExamID>\n" +
-                "                <MedExamReportStatus>已打印</MedExamReportStatus>\n" +
-                "                <MedExamStatus>到达</MedExamStatus>\n" +
-                "                <MedExamReservationDate>2016-10-13</MedExamReservationDate>\n" +
-                "            </MedExamItem>\n" +
-                "            <MedExamItem>\n" +
-                "                <PATPATPatientName>mic1</PATPATPatientName>\n" +
-                "                <SexDesc>男</SexDesc>\n" +
-                "                <PATAge>27</PATAge>\n" +
-                "                <MedExamDate>2016-10-20</MedExamDate>\n" +
-                "                <MedExamID>1163</MedExamID>\n" +
-                "                <MedExamReportStatus>已打印</MedExamReportStatus>\n" +
-                "                <MedExamStatus>到达</MedExamStatus>\n" +
-                "                <MedExamReservationDate>2016-10-13</MedExamReservationDate>\n" +
-                "            </MedExamItem>\n" +
-                "        </MedExamRp>\n" +
-                "    </Body>\n" +
-                "</Response>\n";
         //转成对象
         Response r= XmlUtils.xmlToObject(Response.class,result);
         //插入数据库
@@ -96,32 +64,6 @@ public class PhysicalService {
                 "</Request>\n";
         //远程调用，获取到xml数据
         String result=this.sendWebService(xmlStr,"BOE0075");
-        result="<Response>\n" +
-                "    <Header>\n" +
-                "        <SourceSystem></SourceSystem>\n" +
-                "        <MessageID></MessageID>\n" +
-                "    </Header>\n" +
-                "    <Body>\n" +
-                "        <ResultCode>0</ResultCode>\n" +
-                "        <ResultContent>成功</ResultContent>\n" +
-                "        <MedExamSummaryRp>\n" +
-                "            <MedExamSummaryItem>\n" +
-                "                <MedExamSummary>123312</MedExamSummary>\n" +
-                "                <MedExamSummaryDoctor>123213</MedExamSummaryDoctor>\n" +
-                "                <MedExamSummaryDate>123213</MedExamSummaryDate>\n" +
-                "                <MedExamAuditDoctor>132</MedExamAuditDoctor>\n" +
-                "                <MedExamAuditDate>2019-5-5</MedExamAuditDate>\n" +
-                "            </MedExamSummaryItem>\n" +
-                "            <MedExamSummaryItem>\n" +
-                "                <MedExamSummary></MedExamSummary>\n" +
-                "                <MedExamSummaryDoctor></MedExamSummaryDoctor>\n" +
-                "                <MedExamSummaryDate></MedExamSummaryDate>\n" +
-                "                <MedExamAuditDoctor></MedExamAuditDoctor>\n" +
-                "                <MedExamAuditDate></MedExamAuditDate>\n" +
-                "            </MedExamSummaryItem>\n" +
-                "        </MedExamSummaryRp>\n" +
-                "    </Body>\n" +
-                "</Response>\n";
         //转成对象
         Response r= XmlUtils.xmlToObject(Response.class,result);
         //插入数据库
@@ -154,71 +96,6 @@ public class PhysicalService {
                 "</Request>\n";
         //远程调用，获取到xml数据
         String result=this.sendWebService(xmlStr,"BOE0076");
-        result="<Response>\n" +
-                "    <Header>\n" +
-                "        <SourceSystem></SourceSystem>\n" +
-                "        <MessageID></MessageID>\n" +
-                "    </Header>\n" +
-                "    <Body>\n" +
-                "        <ResultCode>0</ResultCode>\n" +
-                "        <ResultContent>成功</ResultContent>\n" +
-                "        <MedExamItemRp>\n" +
-                "            <Total></Total>\n" +
-                "            <MedExamItem>\n" +
-                "                <MedExamItemDesc>123</MedExamItemDesc>\n" +
-                "                <MedExamItemID>123</MedExamItemID>\n" +
-                "                <MedExamItemFormat>123</MedExamItemFormat>\n" +
-                "                <MedExamItemDoctor>123</MedExamItemDoctor>\n" +
-                "                <MedExamItemDate></MedExamItemDate>\n" +
-                "                <IsFirst></IsFirst>\n" +
-                "                <IsLast></IsLast>\n" +
-                "                <MedExamItemStationCode>123</MedExamItemStationCode>\n" +
-                "                <MedExamItemStationName>123</MedExamItemStationName>\n" +
-                "                <MedExamItemDetailList>\n" +
-                "                    <MedExamItemDetailItem>\n" +
-                "                        <MedExamContentDesc></MedExamContentDesc>\n" +
-                "                        <MedExamContentResult></MedExamContentResult>\n" +
-                "                        <MedExamContentUnit></MedExamContentUnit>\n" +
-                "                        <MedExamContentRange></MedExamContentRange>\n" +
-                "                    </MedExamItemDetailItem>\n" +
-                "                    <MedExamItemDetailItem>\n" +
-                "                        <MedExamContentDesc></MedExamContentDesc>\n" +
-                "                        <MedExamContentResult></MedExamContentResult>\n" +
-                "                        <MedExamContentUnit></MedExamContentUnit>\n" +
-                "                        <MedExamContentRange></MedExamContentRange>\n" +
-                "                    </MedExamItemDetailItem>\n" +
-                "                </MedExamItemDetailList>\n" +
-                "                <MedExamExceptionTip></MedExamExceptionTip>\n" +
-                "            </MedExamItem>\n" +
-                "            <MedExamItem>\n" +
-                "                <MedExamItemDesc></MedExamItemDesc>\n" +
-                "                <MedExamItemID></MedExamItemID>\n" +
-                "                <MedExamItemFormat></MedExamItemFormat>\n" +
-                "                <MedExamItemDoctor></MedExamItemDoctor>\n" +
-                "                <MedExamItemDate>2019-2-2</MedExamItemDate>\n" +
-                "                <IsFirst></IsFirst>\n" +
-                "                <IsLast></IsLast>\n" +
-                "                <MedExamItemStationCode></MedExamItemStationCode>\n" +
-                "                <MedExamItemStationName></MedExamItemStationName>\n" +
-                "                <MedExamItemDetailList>\n" +
-                "                    <MedExamItemDetailItem>\n" +
-                "                        <MedExamContentDesc>123</MedExamContentDesc>\n" +
-                "                        <MedExamContentResult>123</MedExamContentResult>\n" +
-                "                        <MedExamContentUnit>123</MedExamContentUnit>\n" +
-                "                        <MedExamContentRange>123</MedExamContentRange>\n" +
-                "                    </MedExamItemDetailItem>\n" +
-                "                    <MedExamItemDetailItem>\n" +
-                "                        <MedExamContentDesc></MedExamContentDesc>\n" +
-                "                        <MedExamContentResult></MedExamContentResult>\n" +
-                "                        <MedExamContentUnit></MedExamContentUnit>\n" +
-                "                        <MedExamContentRange></MedExamContentRange>\n" +
-                "                    </MedExamItemDetailItem>\n" +
-                "                </MedExamItemDetailList>\n" +
-                "                <MedExamExceptionTip></MedExamExceptionTip>\n" +
-                "            </MedExamItem>\n" +
-                "        </MedExamItemRp>\n" +
-                "    </Body>\n" +
-                "</Response>\n";
         //转成对象
         Response r= XmlUtils.xmlToObject(Response.class,result);
         //插入数据库
