@@ -3,6 +3,7 @@ package com.example.service;
 import com.example.dao.DivisionDao;
 import com.example.domain.Header;
 import com.example.domain.Response;
+import com.example.domain.ResponseBuild;
 import com.example.domain.SBody;
 import com.example.receive.DivisionRequest;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class DivisionService {
     @Resource
     private DivisionDao divisionDao;
 
-    public Response insert(DivisionRequest request) {
+    public String insert(DivisionRequest request) {
         int insert = divisionDao.insert(request.getHeader().getSourceSystem(), request.getHeader().getMessageID(),
                 request.getDivisionBody().getdT_DeptList().getCT_Dept().getCTD_Code(), request.getDivisionBody().getdT_DeptList().getCT_Dept().getCTD_Desc(),
                 request.getDivisionBody().getdT_DeptList().getCT_Dept().getCTD_CategoryCode(), request.getDivisionBody().getdT_DeptList().getCT_Dept().getCTD_Phonetic(),
@@ -35,22 +36,7 @@ public class DivisionService {
                 request.getDivisionBody().getdT_DeptList().getCT_Dept().getCTD_DepartmentGroup(), request.getDivisionBody().getdT_DeptList().getCT_Dept().getCTD_AdmType(),
                 request.getDivisionBody().getdT_DeptList().getCT_Dept().getCTD_ParentCode(), request.getDivisionBody().getdT_DeptList().getCT_Dept().getCTD_Status());
 
-        Response response = new Response();
-        Header header = new Header();
-        header.setMessageID(request.getHeader().getMessageID());
-        header.setSourceSystem(request.getHeader().getSourceSystem());
-        response.setHeader(header);
-        if (insert > 0) {
-            SBody sBody = new SBody();
-            sBody.setResultContent("成功");
-            sBody.setResultCode("0");
-            response.setBody(sBody);
-            return response;
-        }
-        SBody sBody = new SBody();
-        sBody.setResultContent("失败");
-        sBody.setResultCode("-1");
-        response.setBody(sBody);
-        return response;
+
+        return  ResponseBuild.success();
     }
 }
