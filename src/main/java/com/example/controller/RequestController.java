@@ -46,7 +46,7 @@ public class RequestController {
 
     @RequestMapping(value="/medical",produces = "application/xml; charset=UTF-8")
     @ResponseBody
-    public Response resultNotify(HttpServletRequest request) {
+    public String resultNotify(HttpServletRequest request) {
 
         log.info("个人体检接收接口");
         InputStream ins = null;
@@ -58,12 +58,12 @@ public class RequestController {
             System.out.println("XML报文内容为：" + remess);
              Request request1 = XmlUtils.xmlToObject(Request.class, remess);
              rep = doctorsService.insertDoctor(request1);
-            return rep;
+            return rep.toString();
         } catch (Exception e1) {
             // TODO Auto-generated catch block
             e1.printStackTrace();
         }
-        return rep;
+        return rep.toString();
 
      }
 

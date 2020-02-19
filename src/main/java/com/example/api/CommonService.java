@@ -4,7 +4,8 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
- 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * 接口
  * 
@@ -17,6 +18,6 @@ import javax.jws.WebService;
 public interface CommonService {
     @WebMethod()
     @WebResult(name = "String", targetNamespace = "")
-    public String synPatient(String code,String param);
+    public String synPatient(String code, String param, HttpServletRequest request);
  
 }
