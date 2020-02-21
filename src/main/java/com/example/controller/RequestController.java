@@ -44,7 +44,7 @@ public class RequestController {
     private PersonneService personneService;
 
 
-    @RequestMapping(value="/medical",produces = "application/xml; charset=UTF-8")
+  /*  @RequestMapping(value="/medical",produces = "application/xml; charset=UTF-8")
     @ResponseBody
     public String resultNotify(HttpServletRequest request) {
 
@@ -116,7 +116,7 @@ public class RequestController {
         return rep;
 
     }
-
+*/
      /**
      * @功能 读取流
      * @param inStream
