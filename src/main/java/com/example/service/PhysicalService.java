@@ -33,11 +33,17 @@ public class PhysicalService {
                 "</Request>\n";
         //远程调用，获取到xml数据
         String result=this.sendWebService(xmlStr,"BOE0074");
+        if(result!=null&&!result.equals("")){
+            return null;
+        }
         //转成对象
         Response r= XmlUtils.xmlToObject(Response.class,result);
         //插入数据库
         physicalDAO.delPhysical(new Long(PATPatientID));
         List<Physical> physicalList=r.getBody().getMedExamRp().getPhysicalsList();
+        if(physicalList==null){
+            return  null;
+        }
         for (Physical physical:physicalList) {
             physical.setSourceSystem(SourceSystem);
             physical.setMessageID(MessageID);
@@ -65,6 +71,9 @@ public class PhysicalService {
                 "</Request>\n";
         //远程调用，获取到xml数据
         String result=this.sendWebService(xmlStr,"BOE0075");
+        if(result!=null&&!result.equals("")){
+            return null;
+        }
         //转成对象
         Response r= XmlUtils.xmlToObject(Response.class,result);
         //插入数据库
@@ -97,6 +106,9 @@ public class PhysicalService {
                 "</Request>\n";
         //远程调用，获取到xml数据
         String result=this.sendWebService(xmlStr,"BOE0076");
+        if(result!=null&&!result.equals("")){
+            return null;
+        }
         //转成对象
         Response r= XmlUtils.xmlToObject(Response.class,result);
         //插入数据库

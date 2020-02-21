@@ -5,6 +5,7 @@ import ch.qos.logback.core.util.FileUtil;
 import com.alibaba.druid.util.StringUtils;
 import com.example.api.CommonService;
 import com.example.domain.JsonResponse;
+import com.example.domain.Physical;
 import com.example.service.PhysicalService;
 import com.example.service.util.MapUtil;
 import com.sun.imageio.plugins.common.ImageUtil;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
 import java.util.Map;
 
 
@@ -40,7 +42,8 @@ public class PhysicalController {
         String SourceSystem=MapUtil.getString(params,"SourceSystem");
         String MessageID=MapUtil.getString(params,"MessageID");
         String PATPatientID=MapUtil.getString(params,"PATPatientID");
-        return  new JsonResponse(physicalService.getList(SourceSystem,MessageID,PATPatientID));
+        List<Physical> physicalList= physicalService.getList(SourceSystem,MessageID,PATPatientID);
+        return  new JsonResponse(physicalList);
     }
 
        /**
