@@ -144,4 +144,8 @@
         delete from hospital.address where id = #{id}
     </delete>
 
+
+
+
+
 </mapper>

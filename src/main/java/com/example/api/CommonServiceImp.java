@@ -69,40 +69,6 @@ public class CommonServiceImp implements CommonService {
         try {
             if(code.equals("T0004")) {
                 result = patientService.insert(param);
-            }else if(code.equals("BOE0074")){//查询历次体检记录,
-                result= "<Response>\n" +
-                        "    <Header>\n" +
-                        "        <SourceSystem></SourceSystem>\n" +
-                        "        <MessageID></MessageID>\n" +
-                        "    </Header>\n" +
-                        "    <Body>\n" +
-                        "        <ResultCode>0</ResultCode>\n" +
-                        "        <ResultContent>成功</ResultContent>\n" +
-                        "        <MedExamRp>\n" +
-                        "            <MedExamItem>\n" +
-                        "                <PATPATPatientName>mic1</PATPATPatientName>\n" +
-                        "                <SexDesc>男</SexDesc>\n" +
-                        "                <PATAge>27</PATAge>\n" +
-                        "                <MedExamDate>2016-10-20</MedExamDate>\n" +
-                        "                <MedExamID>1163</MedExamID>\n" +
-                        "                <MedExamReportStatus>已打印</MedExamReportStatus>\n" +
-                        "                <MedExamStatus>到达</MedExamStatus>\n" +
-                        "                <MedExamReservationDate>2016-10-13</MedExamReservationDate>\n" +
-                        "            </MedExamItem>\n" +
-                        "            <MedExamItem>\n" +
-                        "                <PATPATPatientName>mic1</PATPATPatientName>\n" +
-                        "                <SexDesc>男</SexDesc>\n" +
-                        "                <PATAge>27</PATAge>\n" +
-                        "                <MedExamDate>2016-10-20</MedExamDate>\n" +
-                        "                <MedExamID>1163</MedExamID>\n" +
-                        "                <MedExamReportStatus>已打印</MedExamReportStatus>\n" +
-                        "                <MedExamStatus>到达</MedExamStatus>\n" +
-                        "                <MedExamReservationDate>2016-10-13</MedExamReservationDate>\n" +
-                        "            </MedExamItem>\n" +
-                        "        </MedExamRp>\n" +
-                        "    </Body>\n" +
-                        "</Response>\n";
-                //模拟从东华查询出来的xml数据
             }else if(code.equals("BOE0189")){
 
                 log.info("个人体检接收接口");

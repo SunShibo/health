@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * 接口
- * 
+ *
  * @author leftso
  *
  */
@@ -19,5 +19,5 @@ public interface CommonService {
     @WebMethod()
     @WebResult(name = "String", targetNamespace = "")
     public String synPatient(String code, String param);
- 
+
 }

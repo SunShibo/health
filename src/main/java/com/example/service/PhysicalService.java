@@ -1,6 +1,7 @@
 package com.example.service;
 
 import com.example.api.CommonService;
+import com.example.api.PUB0015Soap;
 import com.example.dao.PhysicalDAO;
 import com.example.domain.*;
 import com.example.service.util.XmlUtils;
@@ -121,18 +122,24 @@ public class PhysicalService {
 
     public String sendWebService(String xmlStr, String code) {
         // 接口地址
-        String address = "http://60.174.197.150:57772/csp/hsb/DHC.Published.PUB0015.BS.PUB0015.CLS?WSDL=1";
+        String address = "http://60.174.197.150:57772/csp/hsb/DHC.Published.PUB0015.BS.PUB0015.CLS";
         // String address = "http://localhost:13001/services/CommonService?wsdl";
         // 代理工厂
+
         JaxWsProxyFactoryBean jaxWsProxyFactoryBean = new JaxWsProxyFactoryBean();
+        System.out.printf("代理工厂 .....");
         // 设置代理地址
         jaxWsProxyFactoryBean.setAddress(address);
+        System.out.printf("设置代理地址 .....");
         // 设置接口类型
-        jaxWsProxyFactoryBean.setServiceClass(CommonService.class);
+        jaxWsProxyFactoryBean.setServiceClass(PUB0015Soap.class);
+        System.out.printf("设置接口类型 .....");
         // 创建一个代理接口实现
-        CommonService cs = (CommonService) jaxWsProxyFactoryBean.create();
+        PUB0015Soap cs = (PUB0015Soap) jaxWsProxyFactoryBean.create();
+        System.out.printf("创建一个代理接口实现 .....");
         // 调用代理接口的方法调用并返回xml结果
-        String result = cs.synPatient(code, xmlStr);
+        String result = cs.hipMessageServer(code, xmlStr);
+        System.out.printf("调用代理接口的方法调用并返回xml结果 ....."+result);
         return result;
     }
 }
