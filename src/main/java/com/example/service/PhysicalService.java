@@ -121,7 +121,7 @@ public class PhysicalService {
 
     public String sendWebService(String xmlStr, String code) {
         // 接口地址
-        String address = "http://123.56.71.194:13001/services/CommonService?wsdl";
+        String address = "http://60.174.197.150:57772/csp/hsb/DHC.Published.PUB0015.BS.PUB0015.CLS?WSDL=1";
         // String address = "http://localhost:13001/services/CommonService?wsdl";
         // 代理工厂
         JaxWsProxyFactoryBean jaxWsProxyFactoryBean = new JaxWsProxyFactoryBean();
