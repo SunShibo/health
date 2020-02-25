@@ -1,6 +1,5 @@
 package com.example.dao;
 
-import com.example.domain.Certificate;
 import com.example.domain.Certificates;
 
 /**
@@ -20,5 +19,8 @@ public interface CertificateDao {
      */
     int insert(Certificates certificate);
 
-
+    /*
+    *查询患者证件
+     */
+    Certificates queryAll(Long patId);
 }

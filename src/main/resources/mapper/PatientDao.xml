@@ -38,6 +38,76 @@
         <result property="hospital" column="Hospital" jdbcType="VARCHAR"/>
     </resultMap>
 
+    <resultMap type="com.example.domain.Patients" id="PatientJson">
+        <result property="PATPatientID" column="PATPatientID" jdbcType="VARCHAR"/>
+        <result property="PATPatientName" column="PATPatientName" jdbcType="VARCHAR"/>
+        <result property="PATDob" column="PATDob" jdbcType="TIMESTAMP"/>
+        <result property="PATAge" column="PATAge" jdbcType="VARCHAR"/>
+        <result property="PATSexCode" column="PATSexCode" jdbcType="VARCHAR"/>
+        <result property="PATSexDesc" column="PATSexDesc" jdbcType="VARCHAR"/>
+        <result property="PATMaritalStatusCode" column="PATMaritalStatusCode" jdbcType="VARCHAR"/>
+        <result property="PATMaritalStatusDesc" column="PATMaritalStatusDesc" jdbcType="VARCHAR"/>
+        <result property="PATNationCode" column="PATNationCode" jdbcType="VARCHAR"/>
+        <result property="PATNationDesc" column="PATNationDesc" jdbcType="VARCHAR"/>
+        <result property="PATCountryCode" column="PATCountryCode" jdbcType="VARCHAR"/>
+        <result property="PATCountryDesc" column="PATCountryDesc" jdbcType="VARCHAR"/>
+        <result property="PATDeceasedDate" column="PATDeceasedDate" jdbcType="TIMESTAMP"/>
+        <result property="PATDeceasedTime" column="PATDeceasedTime" jdbcType="OTHER"/>
+        <result property="PATHealthCardID" column="PATHealthCardID" jdbcType="VARCHAR"/>
+        <result property="PATMotherID" column="PATMotherID" jdbcType="VARCHAR"/>
+        <result property="PATOccupationCode" column="PATOccupationCode" jdbcType="VARCHAR"/>
+        <result property="PATOccupationDesc" column="PATOccupationDesc" jdbcType="VARCHAR"/>
+        <result property="PATWorkPlaceName" column="PATWorkPlaceName" jdbcType="VARCHAR"/>
+        <result property="PATWorkPlaceTelNum" column="PATWorkPlaceTelNum" jdbcType="VARCHAR"/>
+        <result property="PATTelephone" column="PATTelephone" jdbcType="VARCHAR"/>
+        <result property="PATRemarks" column="PATRemarks" jdbcType="VARCHAR"/>
+        <result property="UpdateUserCode" column="UpdateUserCode" jdbcType="VARCHAR"/>
+        <result property="UpdateUserDesc" column="UpdateUserDesc" jdbcType="VARCHAR"/>
+        <result property="UpdateDate" column="UpdateDate" jdbcType="TIMESTAMP"/>
+        <result property="UpdateTime" column="UpdateTime" jdbcType="OTHER"/>
+        <result property="BusinessFieldCode" column="BusinessFieldCode" jdbcType="VARCHAR"/>
+        <result property="HospitalCode" column="HospitalCode" jdbcType="VARCHAR"/>
+        <result property="PATDocumentNo" column="PATDocumentNo" jdbcType="VARCHAR"/>
+        <collection property="Address" ofType="com.example.domain.Addersss">
+            <result property="PATAddressType" column="PATAddressType" jdbcType="VARCHAR"/>
+            <result property="PATAddressDesc" column="PATAddressDesc" jdbcType="VARCHAR"/>
+            <result property="PATHouseNum" column="PATHouseNum" jdbcType="VARCHAR"/>
+            <result property="PATVillage" column="PATVillage" jdbcType="VARCHAR"/>
+            <result property="PATCountryside" column="PATCountryside" jdbcType="VARCHAR"/>
+            <result property="PATCountyCode" column="PATCountyCode" jdbcType="VARCHAR"/>
+            <result property="PATCountyDesc" column="PATCountyDesc" jdbcType="VARCHAR"/>
+            <result property="PATCityCode" column="PATCityCode" jdbcType="VARCHAR"/>
+            <result property="PATCityDesc" column="PATCityDesc" jdbcType="VARCHAR"/>
+            <result property="PATProvinceCode" column="PATProvinceCode" jdbcType="VARCHAR"/>
+            <result property="PATProvinceDesc" column="PATProvinceDesc" jdbcType="VARCHAR"/>
+            <result property="PATPostalCode" column="PATPostalCode" jdbcType="VARCHAR"/>
+        </collection>
+        <collection property="Certificate" ofType="com.example.domain.Certificatess">
+            <result property="PATIdentityNum" column="PATIdentityNum" jdbcType="VARCHAR"/>
+            <result property="PATIdTypeCode" column="PATIdTypeCode" jdbcType="VARCHAR"/>
+            <result property="PATIdTypeDesc" column="PATIdTypeDesc" jdbcType="VARCHAR"/>
+        </collection>
+        <collection property="PATRelation" ofType="com.example.domain.PATRelation">
+            <result property="PATRelationCode" column="PATRelationCode" jdbcType="VARCHAR"/>
+            <result property="PATRelationDesc" column="PATRelationDesc" jdbcType="VARCHAR"/>
+            <result property="PATRelationName" column="PATRelationName" jdbcType="VARCHAR"/>
+            <result property="PATRelationPhonee" column="PATRelationPhone" jdbcType="VARCHAR"/>
+            <collection property="IcAddress" ofType="com.example.domain.ConsAddress">
+                <result property="contsId" column="contsId" jdbcType="INTEGER"/>
+                <result property="PATRelationAddressDesc" column="PATRelationAddressDesc" jdbcType="VARCHAR"/>
+                <result property="PATRelationHouseNum" column="PATRelationHouseNum" jdbcType="VARCHAR"/>
+                <result property="PATRelationVillage" column="PATRelationVillage" jdbcType="VARCHAR"/>
+                <result property="PATRelationCountryside" column="PATRelationCountryside" jdbcType="VARCHAR"/>
+                <result property="PATRelationCountyCode" column="PATRelationCountyCode" jdbcType="VARCHAR"/>
+                <result property="PATRelationCountyDesc" column="PATRelationCountyDesc" jdbcType="VARCHAR"/>
+                <result property="PATRelationCityCode" column="PATRelationCityCode" jdbcType="VARCHAR"/>
+                <result property="PATRelationCityDesc" column="PATRelationCityDesc" jdbcType="VARCHAR"/>
+                <result property="PATRelationProvinceCode" column="PATRelationProvinceCode" jdbcType="VARCHAR"/>
+                <result property="PATRelationProvinceDesc" column="PATRelationProvinceDesc" jdbcType="VARCHAR"/>
+                <result property="PATRelationPostalCode" column="PATRelationPostalCode" jdbcType="VARCHAR"/>
+            </collection>
+        </collection>
+    </resultMap>
 
     <!--新增所有列-->
     <insert id="insert"  keyProperty="id" useGeneratedKeys="true">
@@ -155,6 +225,26 @@
     </delete>
 
 
+    <!--查询患者2020/02/25-->
+    <select id="selectPatient" resultMap="PatientJson">
+        SELECT * FROM hospital.patient t  left join hospital.address addres on addres.patId=t.id left join hospital.certificate cer
+        on cer.patId=t.id left join hospital.physical phy on phy.patId = t.id left join hospital.cons_address conadd
+        on conadd.contsId=phy.id
+        <where>
+          <if test="HospitalCode != null and HospitalCode != ''">
+              and t.HospitalCode = #{HospitalCode}
+          </if>
+          <if test="PATPatientID != null and PATPatientID != ''">
+              and t.PATPatientID = #{PATPatientID}
+          </if>
+          <if test="PATTelephone != null and PATTelephone != ''">
+              and t.PATTelephone = #{PATTelephone}
+          </if>
+          <if test="PATIdentityNum != null and PATIdentityNum != ''">
+             and cer.PATIdentityNum = #{PATIdentityNum}
+          </if>
+        </where>
+    </select>
 
 
 </mapper>

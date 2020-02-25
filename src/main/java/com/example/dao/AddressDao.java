@@ -17,4 +17,8 @@ public interface AddressDao {
      */
     int insert(Address address);
 
+    /*
+    *查询患者地址 2020/02/25
+     */
+    Address selectAddress(Long patId);
 }

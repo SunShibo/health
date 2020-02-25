@@ -2,6 +2,8 @@ package com.example.dao;
 
 
 import com.example.domain.Patient;
+import com.example.domain.Patients;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * (Patient)表数据库访问层
@@ -19,5 +21,14 @@ public interface PatientDao {
      * @return 影响行数
      */
     int insert(Patient patient);
+
+
+    /*
+     *查询患者身份  2020/02/25
+     */
+    Patients selectPatient(@Param("HospitalCode") String HospitalCode,
+                                   @Param("PATPatientID") String PATPatientID,
+                                   @Param("PATTelephone") String PATTelephone,
+                                   @Param("PATIdentityNum") String PATIdentityNum);
 
 }

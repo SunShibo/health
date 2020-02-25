@@ -1,6 +1,5 @@
 package com.example.service;
 
-import com.alibaba.druid.util.StringUtils;
 import com.example.dao.*;
 import com.example.domain.*;
 import com.example.service.util.XmlUtils;
@@ -80,5 +79,14 @@ import java.util.List;
         return ResponseBuild.success();
     }
 
+    /**
+     * 查询患者 2020/02/25
+     */
+    public Patients queryPatient(String HospitalCode,String PATPatientID,String PATTelephone,String PATIdentityNum)  throws Exception {
+
+        Patients patients = patientDao.selectPatient(HospitalCode,PATPatientID,PATTelephone,PATIdentityNum);
+
+        return patients;
+    }
 
 }
