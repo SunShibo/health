@@ -22,7 +22,7 @@ public class PhysicalService {
         // 数据准备
         String xmlStr = "<Request>\n" +
                 "    <Header>\n" +
-                "        <SourceSystem>" + SourceSystem + "</SourceSystem>\n" +
+                "        <SourceSystem>" + "platform" + "</SourceSystem>\n" +
                 "        <MessageID>" + MessageID + "</MessageID>\n" +
                 "    </Header>\n" +
                 "    <Body>\n" +
@@ -32,21 +32,22 @@ public class PhysicalService {
                 "    </Body>\n" +
                 "</Request>\n";
         //远程调用，获取到xml数据
-        String result=this.sendWebService(xmlStr,"BOE0074");
-        if(result!=null&&!result.equals("")){
+        String result = this.sendWebService(xmlStr, "BOE0074");
+        if (result == null &&  result.equals("")) {
             return null;
         }
         //转成对象
-        Response r= XmlUtils.xmlToObject(Response.class,result);
+        Response r = XmlUtils.xmlToObject(Response.class, result);
         //插入数据库
         physicalDAO.delPhysical(new Long(PATPatientID));
-        List<Physical> physicalList=r.getBody().getMedExamRp().getPhysicalsList();
-        if(physicalList==null){
-            return  null;
+        List<Physical> physicalList = r.getBody().getMedExamRp().getPhysicalsList();
+
+        if (physicalList == null) {
+            return null;
         }
-        for (Physical physical:physicalList) {
-            physical.setSourceSystem(SourceSystem);
-            physical.setMessageID(MessageID);
+        for (Physical physical : physicalList) {
+            physical.setSourceSystem(r.getHeader().getSourceSystem());
+            physical.setMessageID(r.getHeader().getMessageID());
             physical.setPatId(new Long(PATPatientID));
         }
 
@@ -56,30 +57,30 @@ public class PhysicalService {
     }
 
     //根据体检记录查询建议bug：不确定一条体检记录对应几条建议,目前按文档的多条做的
-    public List<Suggest> getSuggest(String SourceSystem, String MessageID, Long MedExamID){
+    public List<Suggest> getSuggest(String SourceSystem, String MessageID, Long MedExamID) {
         // 数据准备
         String xmlStr = "<Request>\n" +
                 "    <Header>\n" +
-                "        <SourceSystem>"+SourceSystem+"</SourceSystem>\n" +
-                "        <MessageID>"+MessageID+"</MessageID>\n" +
+                "        <SourceSystem>" + SourceSystem + "</SourceSystem>\n" +
+                "        <MessageID>" + MessageID + "</MessageID>\n" +
                 "    </Header>\n" +
                 "    <Body>\n" +
                 "        <MedExamSummaryRt>\n" +
-                "            <MedExamID>"+MessageID+"</MedExamID>\n" +
+                "            <MedExamID>" + MedExamID + "</MedExamID>\n" +
                 "        </MedExamSummaryRt>\n" +
                 "    </Body>\n" +
                 "</Request>\n";
         //远程调用，获取到xml数据
-        String result=this.sendWebService(xmlStr,"BOE0075");
-        if(result!=null&&!result.equals("")){
+        String result = this.sendWebService(xmlStr, "BOE0075");
+        if (result != null && !result.equals("")) {
             return null;
         }
         //转成对象
-        Response r= XmlUtils.xmlToObject(Response.class,result);
+        Response r = XmlUtils.xmlToObject(Response.class, result);
         //插入数据库
         physicalDAO.delSuggests(MedExamID);
-        List<Suggest> suggests=r.getBody().getMedExamSummaryRp().getSuggestList();
-        for (Suggest suggest:suggests) {
+        List<Suggest> suggests = r.getBody().getMedExamSummaryRp().getSuggestList();
+        for (Suggest suggest : suggests) {
             suggest.setSourceSystem(SourceSystem);
             suggest.setMessageID(MessageID);
             suggest.setPhyId(MedExamID);
@@ -90,38 +91,38 @@ public class PhysicalService {
     }
 
     //查询报告项目细项结果 bug：
-    public MedExamItemRp getConsequence(String SourceSystem, String MessageID, Long MedExamID, Integer PageNo){
+    public MedExamItemRp getConsequence(String SourceSystem, String MessageID, Long MedExamID, Integer PageNo) {
         // 数据准备
         String xmlStr = "<Request>\n" +
                 "    <Header>\n" +
-                "        <SourceSystem>"+SourceSystem+"</SourceSystem>\n" +
-                "        <MessageID>"+MessageID+"</MessageID>\n" +
+                "        <SourceSystem>" + SourceSystem + "</SourceSystem>\n" +
+                "        <MessageID>" + MessageID + "</MessageID>\n" +
                 "    </Header>\n" +
                 "    <Body>\n" +
                 "        <MedExamRt>\n" +
-                "            <MedExamID>"+MedExamID+"</MedExamID>\n" +
-                "            <PageNo>"+PageNo+"</PageNo>\n" +
+                "            <MedExamID>" + MedExamID + "</MedExamID>\n" +
+                "            <PageNo>" + PageNo + "</PageNo>\n" +
                 "        </MedExamRt>\n" +
                 "    </Body>\n" +
                 "</Request>\n";
         //远程调用，获取到xml数据
-        String result=this.sendWebService(xmlStr,"BOE0076");
-        if(result!=null&&!result.equals("")){
+        String result = this.sendWebService(xmlStr, "BOE0076");
+        if (result != null && !result.equals("")) {
             return null;
         }
         //转成对象
-        Response r= XmlUtils.xmlToObject(Response.class,result);
+        Response r = XmlUtils.xmlToObject(Response.class, result);
         //插入数据库
         physicalDAO.delConsequence(MedExamID);
-        String total=r.getBody().getMedExamItemRp().getTotal();
-        List<Consequence> consequenceList=r.getBody().getMedExamItemRp().getConsequenceList();
-        for (Consequence consequence:consequenceList) {
+        String total = r.getBody().getMedExamItemRp().getTotal();
+        List<Consequence> consequenceList = r.getBody().getMedExamItemRp().getConsequenceList();
+        for (Consequence consequence : consequenceList) {
             consequence.setSourceSystem(SourceSystem);
             consequence.setMessageID(MessageID);
             consequence.setPhyId(MedExamID);
             consequence.setTotal(total);
-            List<PhysicalConse> physicalConses=consequence.getMedExamItemDetailList().getPhysicalConseList();
-            for (PhysicalConse physicalConse:physicalConses) {
+            List<PhysicalConse> physicalConses = consequence.getMedExamItemDetailList().getPhysicalConseList();
+            for (PhysicalConse physicalConse : physicalConses) {
                 physicalConse.setConId(consequence.getId());
             }
             physicalDAO.delPhysicalConse(consequence.getId());
@@ -137,21 +138,24 @@ public class PhysicalService {
         String address = "http://60.174.197.150:57772/csp/hsb/DHC.Published.PUB0015.BS.PUB0015.CLS";
         // String address = "http://localhost:13001/services/CommonService?wsdl";
         // 代理工厂
-
         JaxWsProxyFactoryBean jaxWsProxyFactoryBean = new JaxWsProxyFactoryBean();
-        System.out.printf("代理工厂 .....");
+        System.out.println("代理工厂 .....");
         // 设置代理地址
         jaxWsProxyFactoryBean.setAddress(address);
-        System.out.printf("设置代理地址 .....");
+        System.out.println("设置代理地址 .....");
         // 设置接口类型
         jaxWsProxyFactoryBean.setServiceClass(PUB0015Soap.class);
-        System.out.printf("设置接口类型 .....");
+        System.out.println("设置接口类型 .....");
         // 创建一个代理接口实现
         PUB0015Soap cs = (PUB0015Soap) jaxWsProxyFactoryBean.create();
-        System.out.printf("创建一个代理接口实现 .....");
+        System.out.println("创建一个代理接口实现 .....");
         // 调用代理接口的方法调用并返回xml结果
         String result = cs.hipMessageServer(code, xmlStr);
-        System.out.printf("调用代理接口的方法调用并返回xml结果 ....."+result);
+        System.out.println("调用代理接口的方法调用并返回xml结果 ....." + result);
         return result;
     }
+
+
+
+
 }

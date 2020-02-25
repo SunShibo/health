@@ -31,6 +31,10 @@ public class Physical {
     private String MedExamStatus;//体检状态
     @XmlElement(name = "MedExamReservationDate")
     private String MedExamReservationDate;//体检预约时间
+    @XmlElement(name = "PackageDesc") //体检号
+    private String PackageDesc;
+    @XmlElement(name = "HPNo") //体检号
+    private String HPNo;
     private Long patId;//患者id
 
     public Long getId() {
@@ -127,5 +131,21 @@ public class Physical {
 
     public void setPatId(Long patId) {
         this.patId = patId;
+    }
+
+    public String getPackageDesc() {
+        return PackageDesc;
+    }
+
+    public void setPackageDesc(String packageDesc) {
+        PackageDesc = packageDesc;
+    }
+
+    public String getHPNo() {
+        return HPNo;
+    }
+
+    public void setHPNo(String HPNo) {
+        this.HPNo = HPNo;
     }
 }

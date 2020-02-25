@@ -11,13 +11,13 @@
         (SourceSystem,MessageID,PATPATPatientName,SexDesc,
         PATAge,MedExamDate,MedExamID,
         MedExamReportStatus,MedExamStatus,
-        MedExamReservationDate,patId)
+        MedExamReservationDate,patId,PackageDesc,HPNo)
         values
         <foreach collection="physicalList" item="item" index="index" open="" close="" separator=",">
             (#{item.SourceSystem},#{item.MessageID},#{item.PATPATPatientName},#{item.SexDesc},
             #{item.PATAge},#{item.MedExamDate},#{item.MedExamID},
             #{item.MedExamReportStatus},#{item.MedExamStatus},
-            #{item.MedExamReservationDate},#{item.patId})
+            #{item.MedExamReservationDate},#{item.patId},#{item.PackageDesc},#{item.HPNo})
         </foreach>
 
     </insert>

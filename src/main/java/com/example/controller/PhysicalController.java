@@ -6,8 +6,10 @@ import com.alibaba.druid.util.StringUtils;
 import com.example.api.CommonService;
 import com.example.domain.JsonResponse;
 import com.example.domain.Physical;
+import com.example.domain.Response;
 import com.example.service.PhysicalService;
 import com.example.service.util.MapUtil;
+import com.example.service.util.XmlUtils;
 import com.sun.imageio.plugins.common.ImageUtil;
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +38,7 @@ public class PhysicalController {
      */
     @PostMapping("/physical/getList")
     public JsonResponse getPhysicalList(@RequestBody Map<String, Object> params) throws Exception {
-        if (params==null||params.get("SourceSystem")==null||params.get("PATPatientID")==null){
+        if (params==null|| params.get("PATPatientID")==null){
             return  JsonResponse.fail("参数异常");
         }
         String SourceSystem=MapUtil.getString(params,"SourceSystem");
@@ -83,5 +85,7 @@ public class PhysicalController {
         Integer PageNo=MapUtil.getInteger(params,"PageNo");
         return  new JsonResponse(physicalService.getConsequence(SourceSystem,MessageID,MedExamID,PageNo));
     }
+
+
 
 }
