@@ -76,7 +76,7 @@ public class PhysicalController {
      */
     @PostMapping("/consequence/get")
     public JsonResponse getConsequence(@RequestBody Map<String, Object> params) throws Exception {
-        if (params==null||params.get("SourceSystem")==null||params.get("MedExamID")==null){
+        if (params==null||params.get("MedExamID")==null){
             return  JsonResponse.fail("参数异常");
         }
         String SourceSystem=MapUtil.getString(params,"SourceSystem");
