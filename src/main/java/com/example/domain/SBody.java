@@ -18,7 +18,7 @@ public class SBody {
     private MedExamRp MedExamRp;//历次体检记录
     @XmlElement(name = "MedExamSummaryRp")
     private MedExamSummaryRp MedExamSummaryRp;//体检建议
-    @XmlElement(name = "MedExamRp")
+    @XmlElement(name = "MedExamItemRp")
     private MedExamItemRp MedExamItemRp;//报告项目明细
 
     public com.example.domain.MedExamItemRp getMedExamItemRp() {

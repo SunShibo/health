@@ -4,7 +4,9 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "ExaminationItem")
@@ -36,7 +38,7 @@ public class Consequence {
     @XmlElement(name = "IsLast")
     private String IsLast;//最后一条
     @XmlElement(name = "MedExamItemDetailList")
-    private MedExamItemDetailList MedExamItemDetailList;//体检项目详细列表（标签）
+    private List<PhysicalConse> physicalConseList=new ArrayList<>();//体检项目详细列表（标签）
     @XmlElement(name = "MedExamExceptionTip")
     private String MedExamExceptionTip;//体检异常提示
 
@@ -56,12 +58,12 @@ public class Consequence {
         MedExamExceptionTip = medExamExceptionTip;
     }
 
-    public com.example.domain.MedExamItemDetailList getMedExamItemDetailList() {
-        return MedExamItemDetailList;
+    public List<PhysicalConse> getPhysicalConseList() {
+        return physicalConseList;
     }
 
-    public void setMedExamItemDetailList(com.example.domain.MedExamItemDetailList medExamItemDetailList) {
-        MedExamItemDetailList = medExamItemDetailList;
+    public void setPhysicalConseList(List<PhysicalConse> physicalConseList) {
+        this.physicalConseList = physicalConseList;
     }
 
     public Long getId() {
