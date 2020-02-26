@@ -26,15 +26,17 @@ public class Physical {
     @XmlElement(name = "MedExamID")
     private String MedExamID;//体检ID
     @XmlElement(name = "MedExamReportStatus")
-    private String MedExamReportStatus;//体检报告状态
+    private String MedExamReportStatus;//体检状态
     @XmlElement(name = "MedExamStatus")
     private String MedExamStatus;//体检状态
     @XmlElement(name = "MedExamReservationDate")
     private String MedExamReservationDate;//体检预约时间
-    @XmlElement(name = "PackageDesc") //体检号
+    @XmlElement(name = "PackageDesc") //套餐编码
     private String PackageDesc;
-    @XmlElement(name = "HPNo") //体检号
+    @XmlElement(name = "HPNo") //体检编号
     private String HPNo;
+    @XmlElement(name = "Company")
+    private String Company;//团体名称
     private Long patId;//患者id
 
     public Long getId() {
@@ -147,5 +149,13 @@ public class Physical {
 
     public void setHPNo(String HPNo) {
         this.HPNo = HPNo;
+    }
+
+    public String getCompany() {
+        return Company;
+    }
+
+    public void setCompany(String company) {
+        Company = company;
     }
 }

@@ -61,7 +61,7 @@ public class PhysicalService {
         // 数据准备
         String xmlStr = "<Request>\n" +
                 "    <Header>\n" +
-                "        <SourceSystem>" + SourceSystem + "</SourceSystem>\n" +
+                "        <SourceSystem>"  + "platform" + "</SourceSystem>\n" +
                 "        <MessageID>" + MessageID + "</MessageID>\n" +
                 "    </Header>\n" +
                 "    <Body>\n" +

@@ -25,10 +25,10 @@ public class PatientController {
      */
 
     @PostMapping("/patient/queryPatient")
-    public JsonResponse queryPatient(@RequestBody Map request) throws Exception {
-        String HospitalCode = request.get("HospitalCode").toString();
-        String PATPatientID = request.get("PATPatientID").toString();
-        String PATTelephone = request.get("PATTelephone").toString();
+    public JsonResponse queryPatient(@RequestBody Map<String,String> request) throws Exception {
+        String HospitalCode = request.get("HospitalCode");
+        String PATPatientID = request.get("PATPatientID");
+        String PATTelephone = request.get("PATTelephone");
         String PATIdentityNum = request.get("PATIdentityNum").toString();
         if(StringUtils.isEmpty(HospitalCode) ){
             return  JsonResponse.fail("参数异常");
