@@ -5,11 +5,13 @@ import com.example.domain.Header;
 import com.example.domain.Response;
 import com.example.domain.ResponseBuild;
 import com.example.domain.SBody;
+import com.example.receive.Doctor;
 import com.example.receive.Request;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by wang bin
@@ -30,4 +32,9 @@ public class DoctorsService {
 
         return  ResponseBuild.success();
     }
+
+
+     public List<Doctor> queryDoctor(String  patpatientID, String hospitalCode, String medExamNumber){
+         return  doctorsDao.queryDoctor(patpatientID,hospitalCode,medExamNumber);
+     }
 }

@@ -68,22 +68,16 @@ public class CommonServiceImp implements CommonService {
         String  result = null;
         try {
             if(code.equals("T0004")) {
+                log.info("个人体检接收接口");
                 result = patientService.insert(param);
             }else if(code.equals("BOE0189")){
-
-                log.info("个人体检接收接口");
-                InputStream ins = null;
                 String rep = null;
-
-
                 Request request1 = XmlUtils.xmlToObject(Request.class, param);
                 rep = doctorsService.insertDoctor(request1);
                 return rep;
             }else if(code.equals("MS003")){
                 log.info("科室字典接收接口");
-                InputStream ins = null;
                 String rep = null;
-
                 DivisionRequest req = XmlUtils.xmlToObject(DivisionRequest.class, param);
                 log.info("测试数据:{}",req.getDivisionBody().getdT_DeptList().getCT_Dept().getBusinessFieldCode());
                 rep = divisionService.insert(req);
@@ -91,9 +85,7 @@ public class CommonServiceImp implements CommonService {
 
             }else if(code.equals("MS004")){
                 log.info("人员字典接收接口");
-                InputStream ins = null;
                 String rep = null;
-
                 PersonnelRequest req = XmlUtils.xmlToObject(PersonnelRequest.class, param);
                 log.info("测试数据:{}",req.getPersonnelDody().getCt_careProvList().getCt_careProv().getBusinessFieldCode());
                 rep = personneService.insert(req);

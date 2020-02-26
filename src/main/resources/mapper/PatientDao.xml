@@ -91,7 +91,7 @@
             <result property="PATRelationCode" column="PATRelationCode" jdbcType="VARCHAR"/>
             <result property="PATRelationDesc" column="PATRelationDesc" jdbcType="VARCHAR"/>
             <result property="PATRelationName" column="PATRelationName" jdbcType="VARCHAR"/>
-            <result property="PATRelationPhonee" column="PATRelationPhone" jdbcType="VARCHAR"/>
+            <result property="PATRelationPhone" column="PATRelationPhone" jdbcType="VARCHAR"/>
             <collection property="IcAddress" ofType="com.example.domain.ConsAddress">
                 <result property="contsId" column="contsId" jdbcType="INTEGER"/>
                 <result property="PATRelationAddressDesc" column="PATRelationAddressDesc" jdbcType="VARCHAR"/>
@@ -228,7 +228,7 @@
     <!--查询患者2020/02/25-->
     <select id="selectPatient" resultMap="PatientJson">
         SELECT * FROM hospital.patient t  left join hospital.address addres on addres.patId=t.id left join hospital.certificate cer
-        on cer.patId=t.id left join hospital.physical phy on phy.patId = t.id left join hospital.cons_address conadd
+        on cer.patId=t.id left join hospital.contacts phy on phy.patId = t.id left join hospital.cons_address conadd
         on conadd.contsId=phy.id
         <where>
           <if test="HospitalCode != null and HospitalCode != ''">

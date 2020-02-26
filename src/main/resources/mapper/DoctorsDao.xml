@@ -29,4 +29,13 @@
 
     </insert>
 
+
+    <select id="queryDoctor" resultType="com.example.receive.Doctor"  >
+      SELECT * FROM `doctors` WHERE PATPatientID=#{patpatientID}  AND HospitalCode=#{hospitalCode}
+      <if test="medExamNumber!=null and medExamNumber!=''" >
+          AND  MedExamNumber= #{medExamNumber}
+      </if>
+
+    </select>
+
 </mapper>

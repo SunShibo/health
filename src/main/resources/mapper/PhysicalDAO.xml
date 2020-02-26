@@ -17,7 +17,7 @@
             (#{item.SourceSystem},#{item.MessageID},#{item.PATPATPatientName},#{item.SexDesc},
             #{item.PATAge},#{item.MedExamDate},#{item.MedExamID},
             #{item.MedExamReportStatus},#{item.MedExamStatus},
-            #{item.MedExamReservationDate},#{item.patId},#{item.PackageDesc},#{item.HPNo},#{item.Company)
+            #{item.MedExamReservationDate},#{item.patId},#{item.PackageDesc},#{item.HPNo},#{item.Company} )
         </foreach>
 
     </insert>
