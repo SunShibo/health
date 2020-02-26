@@ -33,7 +33,7 @@ public class PhysicalService {
                 "</Request>\n";
         //远程调用，获取到xml数据
         String result = this.sendWebService(xmlStr, "BOE0074");
-        if (result == null &&  result.equals("")) {
+        if (result == null ||  result.equals("")) {
             return null;
         }
         //转成对象
@@ -72,7 +72,7 @@ public class PhysicalService {
                 "</Request>\n";
         //远程调用，获取到xml数据
         String result = this.sendWebService(xmlStr, "BOE0075");
-        if (result == null && result.equals("")) {
+        if (result == null || result.equals("")) {
             return null;
         }
         //转成对象
@@ -81,8 +81,8 @@ public class PhysicalService {
         physicalDAO.delSuggests(MedExamID);
         List<Suggest> suggests = r.getBody().getMedExamSummaryRp().getSuggestList();
         for (Suggest suggest : suggests) {
-            suggest.setSourceSystem(SourceSystem);
-            suggest.setMessageID(MessageID);
+            suggest.setSourceSystem(r.getHeader().getSourceSystem());
+            suggest.setMessageID(r.getHeader().getMessageID());
             suggest.setPhyId(MedExamID);
         }
         physicalDAO.addSuggests(suggests);
@@ -95,7 +95,7 @@ public class PhysicalService {
         // 数据准备
         String xmlStr = "<Request>\n" +
                 "    <Header>\n" +
-                "        <SourceSystem>" + SourceSystem + "</SourceSystem>\n" +
+                "        <SourceSystem>" + "platform" + "</SourceSystem>\n" +
                 "        <MessageID>" + MessageID + "</MessageID>\n" +
                 "    </Header>\n" +
                 "    <Body>\n" +
@@ -107,7 +107,7 @@ public class PhysicalService {
                 "</Request>\n";
         //远程调用，获取到xml数据
         String result = this.sendWebService(xmlStr, "BOE0076");
-        if (result == null && result.equals("")) {
+        if (result == null || result.equals("")) {
             return null;
         }
         //转成对象
@@ -119,8 +119,8 @@ public class PhysicalService {
         String total = r.getBody().getMedExamItemRp().getTotal();
         List<Consequence> consequenceList = r.getBody().getMedExamItemRp().getConsequenceList();
         for (Consequence consequence : consequenceList) {
-            consequence.setSourceSystem(SourceSystem);
-            consequence.setMessageID(MessageID);
+            consequence.setSourceSystem(r.getHeader().getSourceSystem());
+            consequence.setMessageID(r.getHeader().getMessageID());
             consequence.setPhyId(MedExamID);
             consequence.setTotal(total);
             List<PhysicalConse> physicalConses = consequence.getPhysicalConseList();

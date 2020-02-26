@@ -57,7 +57,7 @@ public class PhysicalController {
      */
     @PostMapping("/suggest/get")
     public JsonResponse getSuggest(@RequestBody Map<String, Object> params) throws Exception {
-        if (params==null||params.get("SourceSystem")==null||params.get("MedExamID")==null){
+        if (params==null||params.get("MedExamID")==null){
             return  JsonResponse.fail("参数异常");
         }
         String SourceSystem=MapUtil.getString(params,"SourceSystem");
