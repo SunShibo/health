@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Date;
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name = "MedExamSummaryItem")
+@XmlRootElement(name = "ExaminationSummary")
 public class Suggest {
     private Long id;//体检建议
     private String SourceSystem;//消息来源

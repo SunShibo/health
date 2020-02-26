@@ -6,13 +6,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
-@XmlRootElement(name = "MedExamItemRp")
+@XmlRootElement(name = "MedExamRp")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class MedExamItemRp {
     @XmlElement(name = "Total")
     private String Total;
 
-    @XmlElement(name = "MedExamItem")
+    @XmlElement(name = "ExaminationItem")
     private List<Consequence>  consequenceList;
 
     public String getTotal() {
