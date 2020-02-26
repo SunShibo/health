@@ -9,7 +9,7 @@ import java.util.List;
 @XmlRootElement(name = "MedExamSummaryRp")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class MedExamSummaryRp {
-    @XmlElement(name = "MedExamSummaryItem")
+    @XmlElement(name = "ExaminationSummary")
     private List<Suggest> suggestList;
 
     public List<Suggest> getSuggestList() {

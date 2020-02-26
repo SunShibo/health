@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Date;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name = "MedExamItem")
+@XmlRootElement(name = "ExaminationItem")
 public class Consequence {
     private Long id;//报告项目详细结果
     private String SourceSystem;//消息来源

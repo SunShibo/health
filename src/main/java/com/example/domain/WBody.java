@@ -4,18 +4,16 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.List;
 
 @XmlRootElement(name = "Body")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class SBody {
+public class WBody {
 
     @XmlElement(name = "ResultCode")
     private String ResultCode; //响应编码  0:成功  -1:失败
     @XmlElement(name = "ResultContent")
     private String ResultContent; // 返回响应结果
-    @XmlElement(name = "MedExamRp")
-    private MedExamRp MedExamRp;//历次体检记录
+
     @XmlElement(name = "MedExamSummaryRp")
     private MedExamSummaryRp MedExamSummaryRp;//体检建议
     @XmlElement(name = "MedExamRp")
@@ -35,14 +33,6 @@ public class SBody {
 
     public void setMedExamSummaryRp(com.example.domain.MedExamSummaryRp medExamSummaryRp) {
         MedExamSummaryRp = medExamSummaryRp;
-    }
-
-    public com.example.domain.MedExamRp getMedExamRp() {
-        return MedExamRp;
-    }
-
-    public void setMedExamRp(com.example.domain.MedExamRp medExamRp) {
-        MedExamRp = medExamRp;
     }
 
     public String getResultCode() {
