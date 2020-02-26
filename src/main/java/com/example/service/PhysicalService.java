@@ -91,7 +91,7 @@ public class PhysicalService {
     }
 
     //查询报告项目细项结果 bug：
-    public MedExamItemRp getConsequence(String SourceSystem, String MessageID, Long MedExamID, Integer PageNo) {
+    public MedExamItemRp getConsequence(String SourceSystem, String MessageID, Long MedExamID, String PageNo) {
         // 数据准备
         String xmlStr = "<Request>\n" +
                 "    <Header>\n" +
@@ -112,8 +112,11 @@ public class PhysicalService {
         }
         //转成对象
         WResponse r = XmlUtils.xmlToObject(WResponse.class, result);
+        if(!"0".equals(r.getBody().getResultCode())){
+            return null;
+        }
         //插入数据库
-        System.out.println(result);
+
         physicalDAO.delConsequence(MedExamID);
         System.out.println(r.getBody().getMedExamItemRp());
         String total = r.getBody().getMedExamItemRp().getTotal();

@@ -57,7 +57,7 @@ public class PhysicalController {
      */
     @PostMapping("/suggest/get")
     public JsonResponse getSuggest(@RequestBody Map<String, Object> params) throws Exception {
-        if (params==null||params.get("MedExamID")==null){
+        if (params==null||params.get("SourceSystem")==null||params.get("MedExamID")==null){
             return  JsonResponse.fail("参数异常");
         }
         String SourceSystem=MapUtil.getString(params,"SourceSystem");
@@ -82,7 +82,7 @@ public class PhysicalController {
         String SourceSystem=MapUtil.getString(params,"SourceSystem");
         String MessageID=MapUtil.getString(params,"MessageID");
         Long MedExamID=MapUtil.getLong(params,"MedExamID");
-        Integer PageNo=MapUtil.getInteger(params,"PageNo");
+        String PageNo=MapUtil.getString(params,"PageNo");
         return  new JsonResponse(physicalService.getConsequence(SourceSystem,MessageID,MedExamID,PageNo));
     }
 
