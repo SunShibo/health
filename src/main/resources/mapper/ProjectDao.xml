@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.ProjectDao">
+
+    <resultMap type="com.example.domain.Project" id="ProjectMap">
+        <result property="sourceSystem" column="SourceSystem" jdbcType="VARCHAR"/>
+        <result property="messageID" column="MessageID" jdbcType="VARCHAR"/>
+        <result property="stationCode" column="ODR_StationCode" jdbcType="VARCHAR"/>
+        <result property="stationDesc" column="ODR_StationDesc" jdbcType="VARCHAR"/>
+        <result property="itemCode" column="ODR_ItemCode" jdbcType="VARCHAR"/>
+        <result property="itemDesc" column="ODR_ItemDesc" jdbcType="VARCHAR"/>
+        <collection property="itemDetail"  ofType="com.example.domain.ItemDetail" >
+            <result property="itemDetailCode" column="ODR_ItemDetailCode" jdbcType="VARCHAR"/>
+            <result property="itemDetailDesc" column="ODR_ItemDetailDesc" jdbcType="VARCHAR"/>
+            <result property="sequence" column="ODR_Sequence" jdbcType="VARCHAR"/>
+            <result property="required" column="ODR_Required" jdbcType="VARCHAR"/>
+        </collection>
+    </resultMap>
+
+    <!--新增所有列-->
+    <insert id="insertProject" keyProperty="id" useGeneratedKeys="true">
+        insert into hospital.project(SourceSystem, MessageID, ODR_StationCode, ODR_StationDesc, ODR_ItemCode, ODR_ItemDesc)
+        values (#{SourceSystem}, #{MessageID}, #{ODR_StationCode}, #{ODR_StationDesc}, #{ODR_ItemCode}, #{ODR_ItemDesc})
+    </insert>
+
+    <!--新增所有列-->
+    <insert id="insertRelation">
+        insert into hospital.project_relation(p_id, ODR_ItemDetailCode, ODR_ItemDetailDesc, ODR_Sequence, ODR_Required)
+        values (#{pId}, #{ODR_ItemDetailCode}, #{ODR_ItemDetailDesc}, #{ODR_Sequence}, #{ODR_Required})
+    </insert>
+
+
+    <select id="getProjectRelation"  resultMap="ProjectMap">
+        SELECT * FROM `project` p LEFT JOIN project_relation r on r.p_id=p.id
+    </select>
+
+</mapper>

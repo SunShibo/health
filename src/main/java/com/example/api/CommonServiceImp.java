@@ -1,29 +1,20 @@
 package com.example.api;
 
-import javax.annotation.Resource;
-import javax.jws.WebService;
-import javax.servlet.http.HttpServletRequest;
-
 import com.alibaba.druid.util.StringUtils;
-import com.example.controller.RequestController;
-import com.example.domain.Patient;
-import com.example.domain.Response;
+import com.example.dao.ProjectDao;
 import com.example.domain.ResponseBuild;
 import com.example.receive.DivisionRequest;
 import com.example.receive.PersonnelRequest;
+import com.example.receive.ProjectRequest;
 import com.example.receive.Request;
-import com.example.service.DivisionService;
-import com.example.service.DoctorsService;
-import com.example.service.PatientService;
-import com.example.service.PersonneService;
+import com.example.service.*;
 import com.example.service.util.XmlUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+import javax.jws.WebService;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
@@ -56,6 +47,8 @@ public class CommonServiceImp implements CommonService {
     @Resource
     private PersonneService personneService;
 
+    @Resource
+    private ProjectService projectService;
 
     @Override
     public String synPatient(String code, String param) {
@@ -90,7 +83,14 @@ public class CommonServiceImp implements CommonService {
                 log.info("测试数据:{}",req.getPersonnelDody().getCt_careProvList().getCt_careProv().getBusinessFieldCode());
                 rep = personneService.insert(req);
                 return rep;
-            }else{
+            }else if(code.equals("BOE0279")){
+                log.info("体检项目细项对照关系推送");
+                String rep = null;
+                ProjectRequest req = XmlUtils.xmlToObject(ProjectRequest.class, param);
+                rep = projectService.insertProject(req);
+                return rep;
+            }
+            else{
                 return ResponseBuild.failure("没有找到接口代码");
             }
         } catch (Exception e) {

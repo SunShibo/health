@@ -57,10 +57,10 @@
     </delete>
     <insert id="addPhysicalConse" parameterType="com.example.domain.PhysicalConse">
         insert into physical_conse
-        (MedExamContentDesc,MedExamContentResult,MedExamContentUnit,MedExamContentRange,conId)
+        (MedExamContentDesc,MedExamContentResult,MedExamContentUnit,MedExamContentRange,conId,MedExamContentCode)
         values
         <foreach collection="physicalConseList" item="item" index="index" open="" close="" separator=",">
-            (#{item.MedExamContentDesc},#{item.MedExamContentResult},#{item.MedExamContentUnit},#{item.MedExamContentRange},#{item.conId})
+            (#{item.MedExamContentDesc},#{item.MedExamContentResult},#{item.MedExamContentUnit},#{item.MedExamContentRange},#{item.conId},#{item.MedExamContentCode})
         </foreach>
     </insert>
 </mapper>

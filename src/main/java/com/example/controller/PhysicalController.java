@@ -1,22 +1,14 @@
 package com.example.controller;
 
 
-import ch.qos.logback.core.util.FileUtil;
-import com.alibaba.druid.util.StringUtils;
-import com.example.api.CommonService;
 import com.example.domain.JsonResponse;
 import com.example.domain.Physical;
-import com.example.domain.Response;
 import com.example.service.PhysicalService;
 import com.example.service.util.MapUtil;
-import com.example.service.util.XmlUtils;
-import com.sun.imageio.plugins.common.ImageUtil;
-import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;

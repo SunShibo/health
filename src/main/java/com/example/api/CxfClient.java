@@ -14,8 +14,8 @@ public class CxfClient {
     public static void cl1() {
         try {
             // 接口地址
-           String address = "http://123.56.71.194:13001/services/CommonService?wsdl";
-            // String address = "http://localhost:13001/services/CommonService?wsdl";
+     //      String address = "http://123.56.71.194:13001/services/CommonService?wsdl";
+             String address = "http://localhost:13001/services/CommonService?wsdl";
             // 代理工厂
             JaxWsProxyFactoryBean jaxWsProxyFactoryBean = new JaxWsProxyFactoryBean();
             // 设置代理地址
@@ -27,92 +27,35 @@ public class CxfClient {
             // 数据准备
             String xmlStr="<Request>\n" +
                     "    <Header>\n" +
-                    "        <SourceSystem>02</SourceSystem>\n" +
-                    "        <MessageID>5237</MessageID>\n" +
+                    "        <SourceSystem> SourceSystem </SourceSystem>\n" +
+                    "        <MessageID> MessageID </MessageID>\n" +
                     "    </Header>\n" +
-                    "    <Body>\n" +
-                    "        <PatientRegistryRt>\n" +
-                    "            <BusinessFieldCode>00001</BusinessFieldCode>\n" +
-                    "            <HospitalCode>医院编码</HospitalCode>\n" +
-                    "            <PATPatientID>101100000079</PATPatientID>\n" +
-                    "            <PATPatientName>宗慧测试专用</PATPatientName>\n" +
-                    "            <PATDob>1995-07-14</PATDob>\n" +
-                    "            <PATAge>23岁</PATAge>\n" +
-                    "            <PATSexCode>2</PATSexCode>\n" +
-                    "            <PATSexDesc>女</PATSexDesc>\n" +
-                    "            <PATMaritalStatusCode>患者婚姻状况代码</PATMaritalStatusCode>\n" +
-                    "            <PATMaritalStatusDesc>患者婚姻状况详情</PATMaritalStatusDesc>\n" +
-                    "            <PATDocumentNo>患者病案号</PATDocumentNo>\n" +
-                    "            <PATNationCode>01</PATNationCode>\n" +
-                    "            <PATNationDesc>汉族</PATNationDesc>\n" +
-                    "            <PATCountryCode>156</PATCountryCode>\n" +
-                    "            <PATCountryDesc>中国</PATCountryDesc>\n" +
-                    "            <PATDeceasedDate></PATDeceasedDate>\n" +
-                    "            <PATDeceasedTime></PATDeceasedTime>\n" +
-                    "            <PATHealthCardID>PATHealthCardID</PATHealthCardID>\n" +
-                    "            <PATMotherID>PATMotherID</PATMotherID>\n" +
-                    "            <PATOccupationCode>PATOccupationCode</PATOccupationCode>\n" +
-                    "            <PATOccupationDesc>PATOccupationDesc</PATOccupationDesc>\n" +
-                    "            <PATWorkPlaceName>PATWorkPlaceName</PATWorkPlaceName>\n" +
-                    "            <PATWorkPlaceTelNum>PATWorkPlaceTelNum</PATWorkPlaceTelNum>\n" +
-                    "            <PATAddressList>\n" +
-                    "                <PATAddress>\n" +
-                    "                    <PATAddressType>09</PATAddressType>\n" +
-                    "                    <PATAddressDesc>22222</PATAddressDesc>\n" +
-                    "                    <PATHouseNum></PATHouseNum>\n" +
-                    "                    <PATVillage></PATVillage>\n" +
-                    "                    <PATCountryside></PATCountryside>\n" +
-                    "                    <PATCountyCode></PATCountyCode>\n" +
-                    "                    <PATCountyDesc></PATCountyDesc>\n" +
-                    "                    <PATCityCode>110100</PATCityCode>\n" +
-                    "                    <PATCityDesc>市辖区</PATCityDesc>\n" +
-                    "                    <PATProvinceCode>110000</PATProvinceCode>\n" +
-                    "                    <PATProvinceDesc>北京市</PATProvinceDesc>\n" +
-                    "                    <PATPostalCode></PATPostalCode>\n" +
-                    "                </PATAddress>\n" +
-                    "            </PATAddressList>\n" +
-                    "            <PATIdentityList>\n" +
-                    "                <PATIdentity>\n" +
-                    "                    <PATIdentityNum>340823199507140828</PATIdentityNum>\n" +
-                    "                    <PATIdTypeCode>01</PATIdTypeCode>\n" +
-                    "                    <PATIdTypeDesc>居民身份证</PATIdTypeDesc>\n" +
-                    "                </PATIdentity>\n" +
-                    "            </PATIdentityList>\n" +
-                    "            <PATRelationList>\n" +
-                    "                <PATRelation>\n" +
-                    "                    <PATRelationCode>PATRelationCode</PATRelationCode>\n" +
-                    "                    <PATRelationDesc>PATRelationDesc</PATRelationDesc>\n" +
-                    "                    <PATRelationName>PATRelationName</PATRelationName>\n" +
-                    "                    <PATRelationPhone>PATRelationPhone</PATRelationPhone>\n" +
-                    "                    <PATRelationAddressList>\n" +
-                    "                        <PATRelationAddress>\n" +
-                    "                            <PATRelationAddressDesc>PATRelationAddressDesc</PATRelationAddressDesc>\n" +
-                    "                            <PATRelationHouseNum>PATRelationHouseNum</PATRelationHouseNum>\n" +
-                    "                            <PATRelationVillage>PATRelationVillage</PATRelationVillage>\n" +
-                    "                            <PATRelationCountryside>PATRelationCountryside</PATRelationCountryside>\n" +
-                    "                            <PATRelationCountyCode>PATRelationCountyCode</PATRelationCountyCode>\n" +
-                    "                            <PATRelationCountyDesc>PATRelationCountyDesc</PATRelationCountyDesc>\n" +
-                    "                            <PATRelationCityCode>PATRelationCityCode</PATRelationCityCode>\n" +
-                    "                            <PATRelationCityDesc>PATRelationCityDesc</PATRelationCityDesc>\n" +
-                    "                            <PATRelationProvinceCode>PATRelationProvinceCode</PATRelationProvinceCode>\n" +
-                    "                            <PATRelationProvinceDesc>PATRelationProvinceDesc</PATRelationProvinceDesc>\n" +
-                    "                            <PATRelationPostalCode>PATRelationPostalCode</PATRelationPostalCode>\n" +
-                    "                        </PATRelationAddress>\n" +
-                    "                    </PATRelationAddressList>\n" +
-                    "                </PATRelation>\n" +
-                    "            </PATRelationList>\n" +
-                    "            <PATTelephone>15656980546</PATTelephone>\n" +
-                    "            <PATRemarks></PATRemarks>\n" +
-                    "            <UpdateUserCode>SF01</UpdateUserCode>\n" +
-                    "            <UpdateUserDesc>SF01</UpdateUserDesc>\n" +
-                    "            <UpdateDate>2018-08-27</UpdateDate>\n" +
-                    "            <UpdateTime>19:41:16</UpdateTime>\n" +
-                    "        </PatientRegistryRt>\n" +
+                    "<Body>\n" +
+                    "    <CT_PE_OrderDetailRelate>\n" +
+                    "        <ODR_StationCode> StationCode </ODR_StationCode>\n" +
+                    "<ODR_StationDesc> StationDesc </ODR_StationDesc>\n" +
+                    "<ODR_ItemCode> ItemCode </ODR_ItemCode>\n" +
+                    "<ODR_ItemDesc> ItemDesc </ODR_ItemDesc>\n" +
+                    "<ItemDetailList>\n" +
+                    "   <ItemDetail>\n" +
+                    "      <ODR_ItemDetailCode> Code</ODR_ItemDetailCode>\n" +
+                    "<ODR_ItemDetailDesc>desc</ODR_ItemDetailDesc>\n" +
+                    "<ODR_Sequence>ce</ODR_Sequence>\n" +
+                    "<ODR_Required>red</ODR_Required>\n" +
+                    "   </ItemDetail>\n" +
+                    "   <ItemDetail>\n" +
+                    "      <ODR_ItemDetailCode>cd</ODR_ItemDetailCode>\n" +
+                    "<ODR_ItemDetailDesc>desc</ODR_ItemDetailDesc>\n" +
+                    "<ODR_Sequence>seqs</ODR_Sequence>\n" +
+                    "<ODR_Required>res</ODR_Required>\n" +
+                    "   </ItemDetail>\n" +
+                    "</ItemDetailList>\n" +
+                    "</CT_PE_OrderDetailRelate>\n" +
                     "    </Body>\n" +
-                    "</Request>\n"  ;
+                    "</Request>\n";
             String userName = "<xml>测试</xml>";
             // 调用代理接口的方法调用并返回结果
-            String result = cs.synPatient("T0004",xmlStr);
+            String result = cs.synPatient("BOE0279",xmlStr);
           System.out.println("返回结果:" + result);
         } catch (Exception e) {
             e.printStackTrace();

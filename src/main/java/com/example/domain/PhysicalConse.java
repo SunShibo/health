@@ -16,6 +16,9 @@ public class PhysicalConse {
     private String MedExamContentUnit;//体检内容单位
     @XmlElement(name = "MedExamContentRange")
     private String MedExamContentRange;//体检内容范围
+    @XmlElement(name = "MedExamContentCode")
+    private String MedExamContentCode;//体检详情id
+
     private Long  conId;//consequence  Id
 
     public Long getConId() {
@@ -56,5 +59,13 @@ public class PhysicalConse {
 
     public void setMedExamContentRange(String medExamContentRange) {
         MedExamContentRange = medExamContentRange;
+    }
+
+    public String getMedExamContentCode() {
+        return MedExamContentCode;
+    }
+
+    public void setMedExamContentCode(String medExamContentCode) {
+        MedExamContentCode = medExamContentCode;
     }
 }
