@@ -1,7 +1,9 @@
 package com.example.controller;
 
 
+import com.example.domain.InformationReponse;
 import com.example.domain.JsonResponse;
+import com.example.domain.PatInfo;
 import com.example.domain.Physical;
 import com.example.service.PhysicalService;
 import com.example.service.util.MapUtil;
@@ -49,7 +51,7 @@ public class PhysicalController {
      */
     @PostMapping("/suggest/get")
     public JsonResponse getSuggest(@RequestBody Map<String, Object> params) throws Exception {
-        if (params==null||params.get("SourceSystem")==null||params.get("MedExamID")==null){
+        if (params==null||params.get("MedExamID")==null){
             return  JsonResponse.fail("参数异常");
         }
         String SourceSystem=MapUtil.getString(params,"SourceSystem");
@@ -79,5 +81,23 @@ public class PhysicalController {
     }
 
 
+    /**
+     * 患者基本信息查询
+     */
+    @PostMapping("/consequence/information")
+    public JsonResponse information(@RequestBody Map<String, Object> params) throws Exception {
 
+        if (params==null||params.get("TradeCode")==null|| params.get("HospitalCode")==null || params.get("UserCode")==null
+            || params.get("PATCardNum")==null  || params.get("PATPatientID")==null  || params.get("IdentityCardNo")==null
+        ){
+            return  JsonResponse.fail("参数异常");
+        }
+        return  new JsonResponse(physicalService.information(params));
+    }
+
+    @PostMapping("/test/test")
+    public JsonResponse test(){
+        PatInfo patInfo = new PatInfo();;
+        return  new JsonResponse(patInfo);
+    }
 }

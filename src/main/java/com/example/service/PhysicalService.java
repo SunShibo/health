@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class PhysicalService {
@@ -142,38 +143,45 @@ public class PhysicalService {
         return r.getBody().getMedExamItemRp();
     }
 
-    public static void main(String []args){
-        String str="<Request>\n" +
+    public static void main(String[] args) {
+        String result="<Response>\n" +
                 "    <Header>\n" +
-                "        <SourceSystem> SourceSystem </SourceSystem>\n" +
-                "        <MessageID> MessageID </MessageID>\n" +
+                "        <MessageID>3658</MessageID>\n" +
+                "        <SourceSystem>02</SourceSystem>\n" +
                 "    </Header>\n" +
-                "<Body>\n" +
-                "    <CT_PE_OrderDetailRelate>\n" +
-                "        <ODR_StationCode> StationCode </ODR_StationCode>\n" +
-                "<ODR_StationDesc> StationDesc </ODR_StationDesc>\n" +
-                "<ODR_ItemCode> ItemCode </ODR_ItemCode>\n" +
-                "<ODR_ItemDesc> ItemDesc </ODR_ItemDesc>\n" +
-                "<ItemDetailList>\n" +
-                "   <ItemDetail>\n" +
-                "      <ODR_ItemDetailCode> Code</ODR_ItemDetailCode>\n" +
-                "<ODR_ItemDetailDesc>desc</ODR_ItemDetailDesc>\n" +
-                "<ODR_Sequence>ce</ODR_Sequence>\n" +
-                "<ODR_Required>red</ODR_Required>\n" +
-                "   </ItemDetail>\n" +
-                "   <ItemDetail>\n" +
-                "      <ODR_ItemDetailCode>cd</ODR_ItemDetailCode>\n" +
-                "<ODR_ItemDetailDesc>desc</ODR_ItemDetailDesc>\n" +
-                "<ODR_Sequence>seqs</ODR_Sequence>\n" +
-                "<ODR_Required>res</ODR_Required>\n" +
-                "   </ItemDetail>\n" +
-                "</ItemDetailList>\n" +
-                "</CT_PE_OrderDetailRelate>\n" +
+                "    <Body>\n" +
+                "        <ResultCode>0</ResultCode>\n" +
+                "        <ResultContent>成功</ResultContent>\n" +
+                "        <GetPatInfoRp>\n" +
+                "            <PatInfo>\n" +
+                "                <PATPatientID>101100000072</PATPatientID>\n" +
+                "                <PATPatientName>张三</PATPatientName>\n" +
+                "                <PATSexDesc>男</PATSexDesc>\n" +
+                "                <PATSexCode>1</PATSexCode>\n" +
+                "                <PATDob>2011-01-01</PATDob>\n" +
+                "                <TelephoneNo>15123454321</TelephoneNo>\n" +
+                "                <PATTelephone>15123454321</PATTelephone>\n" +
+                "                <PATDocumentNo></PATDocumentNo>\n" +
+                "                <PATPatientAddress></PATPatientAddress>\n" +
+                "                <PATIdTypeCode>20</PATIdTypeCode>\n" +
+                "                <PATIdTypeDesc></PATIdTypeDesc>\n" +
+                "                <PATIdentityNum>320282199912144879</PATIdentityNum>\n" +
+                "                <InsureCardNo>ZHANGSAN</InsureCardNo>\n" +
+                "                <AccInfo>0^37534^1011000000720001^24^24^0^^72^101100000072^50007^P^PC^1^^0^37534^1011000000720001^24^24^0^^72^101100000072^50007^P^PC^1^</AccInfo>\n" +
+                "                <AccountBalance>24</AccountBalance>\n" +
+                "                <AccountID>37534</AccountID>\n" +
+                "                <PATCardNum>101100000072</PATCardNum>\n" +
+                "                <YBFlag>0</YBFlag>\n" +
+                "                <PATType>自费</PATType>\n" +
+                "                <PatTypeCode>01</PatTypeCode>\n" +
+                "            </PatInfo>\n" +
+                "        </GetPatInfoRp>\n" +
                 "    </Body>\n" +
-                "</Request>\n";
-        ProjectRequest projectRequest = XmlUtils.xmlToObject(ProjectRequest.class, str);
-        //插入数据库
+                "</Response>\n";
+        InformationReponse information = XmlUtils.xmlToObject(InformationReponse.class, result);
     }
+
+
 
     public String sendWebService(String xmlStr, String code) {
         // 接口地址
@@ -198,6 +206,36 @@ public class PhysicalService {
     }
 
 
-
-
+    public PatInfo information(Map<String, Object> params) {
+        String request="<Request>\n" +
+                "    <Header>\n" +
+                "        <SourceSystem>platform</SourceSystem>\n" +
+                "        <MessageID>"+params.get("MessageID")+"</MessageID>\n" +
+                "    </Header>\n" +
+                "    <Body>\n" +
+                "        <GetPatInfoRt>\n" +
+                "            <TradeCode>"+params.get("TradeCode")+"</TradeCode>\n" +
+                "            <TransactionId>"+params.get("TransactionId")+"</TransactionId>\n" +
+                "            <ExtOrgCode>"+params.get("ExtOrgCode")+"</ExtOrgCode>\n" +
+                "            <ClientType>"+params.get("ClientType")+"</ClientType>\n" +
+                "            <TerminalID>"+params.get("TerminalID")+"</TerminalID>\n" +
+                "            <HospitalCode>"+params.get("HospitalCode")+"</HospitalCode>\n" +
+                "            <UserCode>"+params.get("UserCode")+"</UserCode>\n" +
+                "            <PATCardNum>"+params.get("PATCardNum")+"</PATCardNum>\n" +
+                "            <PATCardType>"+params.get("PATCardType")+"</PATCardType>\n" +
+                "            <PATPatientID>"+params.get("PATPatientID")+"</PATPatientID>\n" +
+                "            <PATTelephone>"+params.get("PATTelephone")+"</PATTelephone>\n" +
+                "            <PATIdTypeCode>"+params.get("PATIdTypeCode")+"</PATIdTypeCode>\n" +
+                "            <IdentityCardNo>"+params.get("IdentityCardNo")+"</IdentityCardNo>\n" +
+                "            <PATPatientName>"+params.get("PATPatientName")+"</PATPatientName>\n" +
+                "            <DayPartingFlag>"+params.get("DayPartingFlag")+"</DayPartingFlag>\n" +
+                "        </GetPatInfoRt>\n" +
+                "    </Body>\n" +
+                "</Request>\n";
+        String result = this.sendWebService(request, "BOE0025");
+        InformationReponse information = XmlUtils.xmlToObject(InformationReponse.class, result);
+        if(information==null || !information.getBody().getResultCode().equals("0"))
+        return null;
+        return information.getBody().getGetPatInfoRp().getPatInfo();
+    }
 }
