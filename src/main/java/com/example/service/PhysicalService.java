@@ -4,7 +4,11 @@ import com.example.api.CommonService;
 import com.example.api.PUB0015Soap;
 import com.example.dao.PhysicalDAO;
 import com.example.domain.*;
+import com.example.domain.sub.OrderResponse;
 import com.example.receive.ProjectRequest;
+import com.example.service.util.DateUtil;
+import com.example.service.util.MD5Util;
+import com.example.service.util.MapUtil;
 import com.example.service.util.XmlUtils;
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -146,39 +150,19 @@ public class PhysicalService {
     public static void main(String[] args) {
         String result="<Response>\n" +
                 "    <Header>\n" +
-                "        <MessageID>3658</MessageID>\n" +
-                "        <SourceSystem>02</SourceSystem>\n" +
+                "        <SourceSystem>CRM</SourceSystem>\n" +
+                "        <MessageID>763b2511-4b16-4707-8b07-4c540c68a551</MessageID>\n" +
                 "    </Header>\n" +
                 "    <Body>\n" +
                 "        <ResultCode>0</ResultCode>\n" +
                 "        <ResultContent>成功</ResultContent>\n" +
-                "        <GetPatInfoRp>\n" +
-                "            <PatInfo>\n" +
-                "                <PATPatientID>101100000072</PATPatientID>\n" +
-                "                <PATPatientName>张三</PATPatientName>\n" +
-                "                <PATSexDesc>男</PATSexDesc>\n" +
-                "                <PATSexCode>1</PATSexCode>\n" +
-                "                <PATDob>2011-01-01</PATDob>\n" +
-                "                <TelephoneNo>15123454321</TelephoneNo>\n" +
-                "                <PATTelephone>15123454321</PATTelephone>\n" +
-                "                <PATDocumentNo></PATDocumentNo>\n" +
-                "                <PATPatientAddress></PATPatientAddress>\n" +
-                "                <PATIdTypeCode>20</PATIdTypeCode>\n" +
-                "                <PATIdTypeDesc></PATIdTypeDesc>\n" +
-                "                <PATIdentityNum>320282199912144879</PATIdentityNum>\n" +
-                "                <InsureCardNo>ZHANGSAN</InsureCardNo>\n" +
-                "                <AccInfo>0^37534^1011000000720001^24^24^0^^72^101100000072^50007^P^PC^1^^0^37534^1011000000720001^24^24^0^^72^101100000072^50007^P^PC^1^</AccInfo>\n" +
-                "                <AccountBalance>24</AccountBalance>\n" +
-                "                <AccountID>37534</AccountID>\n" +
-                "                <PATCardNum>101100000072</PATCardNum>\n" +
-                "                <YBFlag>0</YBFlag>\n" +
-                "                <PATType>自费</PATType>\n" +
-                "                <PatTypeCode>01</PatTypeCode>\n" +
-                "            </PatInfo>\n" +
-                "        </GetPatInfoRp>\n" +
+                "        <CreateAppointmentInfoRp>\n" +
+                "            <AppointmentNumber>SO0001000</AppointmentNumber>\n" +
+                "        </CreateAppointmentInfoRp>\n" +
                 "    </Body>\n" +
                 "</Response>\n";
-        InformationReponse information = XmlUtils.xmlToObject(InformationReponse.class, result);
+        OrderResponse orderResponse = XmlUtils.xmlToObject(OrderResponse.class, result);
+
     }
 
 
@@ -200,6 +184,8 @@ public class PhysicalService {
         PUB0015Soap cs = (PUB0015Soap) jaxWsProxyFactoryBean.create();
         System.out.println("创建一个代理接口实现 .....");
         // 调用代理接口的方法调用并返回xml结果
+        System.out.println("code："+code);
+        System.out.println("请求入参："+xmlStr);
         String result = cs.hipMessageServer(code, xmlStr);
         System.out.println("调用代理接口的方法调用并返回xml结果 ....." +result);
         return result;
@@ -214,21 +200,21 @@ public class PhysicalService {
                 "    </Header>\n" +
                 "    <Body>\n" +
                 "        <GetPatInfoRt>\n" +
-                "            <TradeCode>"+params.get("TradeCode")+"</TradeCode>\n" +
-                "            <TransactionId>"+params.get("TransactionId")+"</TransactionId>\n" +
-                "            <ExtOrgCode>"+params.get("ExtOrgCode")+"</ExtOrgCode>\n" +
-                "            <ClientType>"+params.get("ClientType")+"</ClientType>\n" +
-                "            <TerminalID>"+params.get("TerminalID")+"</TerminalID>\n" +
-                "            <HospitalCode>"+params.get("HospitalCode")+"</HospitalCode>\n" +
-                "            <UserCode>"+params.get("UserCode")+"</UserCode>\n" +
-                "            <PATCardNum>"+params.get("PATCardNum")+"</PATCardNum>\n" +
-                "            <PATCardType>"+params.get("PATCardType")+"</PATCardType>\n" +
-                "            <PATPatientID>"+params.get("PATPatientID")+"</PATPatientID>\n" +
-                "            <PATTelephone>"+params.get("PATTelephone")+"</PATTelephone>\n" +
-                "            <PATIdTypeCode>"+params.get("PATIdTypeCode")+"</PATIdTypeCode>\n" +
-                "            <IdentityCardNo>"+params.get("IdentityCardNo")+"</IdentityCardNo>\n" +
-                "            <PATPatientName>"+params.get("PATPatientName")+"</PATPatientName>\n" +
-                "            <DayPartingFlag>"+params.get("DayPartingFlag")+"</DayPartingFlag>\n" +
+                "            <TradeCode>"+ MapUtil.getString(params,"TradeCode")+"</TradeCode>\n" +
+                "            <TransactionId>"+ MapUtil.getString(params,"TransactionId")+"</TransactionId>\n" +
+                "            <ExtOrgCode>"+MapUtil.getString(params,"ExtOrgCode")+"</ExtOrgCode>\n" +
+                "            <ClientType>"+MapUtil.getString(params,"ClientType")+"</ClientType>\n" +
+                "            <TerminalID>"+MapUtil.getString(params,"TerminalID")+"</TerminalID>\n" +
+                "            <HospitalCode>"+MapUtil.getString(params,"HospitalCode")+"</HospitalCode>\n" +
+                "            <UserCode>"+MapUtil.getString(params,"UserCode")+"</UserCode>\n" +
+                "            <PATCardNum>"+MapUtil.getString(params,"PATCardNum")+"</PATCardNum>\n" +
+                "            <PATCardType>"+MapUtil.getString(params,"PATCardType")+"</PATCardType>\n" +
+                "            <PATPatientID>"+MapUtil.getString(params,"PATPatientID")+"</PATPatientID>\n" +
+                "            <PATTelephone>"+MapUtil.getString(params,"PATTelephone")+"</PATTelephone>\n" +
+                "            <PATIdTypeCode>"+MapUtil.getString(params,"PATIdTypeCode")+"</PATIdTypeCode>\n" +
+                "            <IdentityCardNo>"+MapUtil.getString(params,"IdentityCardNo")+"</IdentityCardNo>\n" +
+                "            <PATPatientName>"+MapUtil.getString(params,"PATPatientName")+"</PATPatientName>\n" +
+                "            <DayPartingFlag>"+MapUtil.getString(params,"DayPartingFlag")+"</DayPartingFlag>\n" +
                 "        </GetPatInfoRt>\n" +
                 "    </Body>\n" +
                 "</Request>\n";
@@ -237,5 +223,82 @@ public class PhysicalService {
         if(information==null || !information.getBody().getResultCode().equals("0"))
         return null;
         return information.getBody().getGetPatInfoRp().getPatInfo();
+    }
+
+    public JsonResponse test(Map<String, Object> params) {
+        String resultXml = this.sendWebService(MapUtil.getString(params,"xml"), MapUtil.getString(params,"code"));
+        OrderResponse orderResponse = XmlUtils.xmlToObject(OrderResponse.class, resultXml);
+        if( orderResponse==null){
+            return new JsonResponse(orderResponse);
+        }
+        if("0".equals(orderResponse.getBody().getResultCode())){
+            return new JsonResponse(orderResponse.getBody().getCreateAppointmentInfoRp().getAppointmentNumber());
+        }
+        return new JsonResponse(orderResponse.getBody().getResultCode(),orderResponse.getBody().getResultContent());
+    }
+
+
+    public JsonResponse reservation(Map<String, Object> params) {
+        List<Map<String,Object>> list=(List<Map<String,Object>>)params.get("OEORIInfoList");
+        String xml="";
+        for(Map<String,Object> map:list){
+            xml+="<OEORIInfo>\n" +
+                    "<OEORIOrderItemID>"+MapUtil.getString(map,"OEORIOrderItemID")+"</OEORIOrderItemID>\n" +
+                    "<OEORIARCItmMastCode>"+MapUtil.getString(map,"OEORIARCItmMastCode")+"</OEORIARCItmMastCode>\n" +
+                    "<OEORIARCItmMastDesc>"+MapUtil.getString(map,"OEORIARCItmMastDesc")+"</OEORIARCItmMastDesc>\n" +
+                    "<OEORIARCItmMastType>"+MapUtil.getString(map,"OEORIARCItmMastType")+"</OEORIARCItmMastType>\n" +
+                    "<OEORIOrderQty>"+MapUtil.getString(map,"OEORIOrderQty")+"</OEORIOrderQty>\n" +
+                    "<OEOPackageDetailPrice>"+MapUtil.getString(map,"OEOPackageDetailPrice")+"</OEOPackageDetailPrice>\n" +
+                 "</OEORIInfo>";
+        }
+        String body="<Body>\n" +
+                "        <CreateAppointmentInfoRt>\n" +
+                "            <SalesOrderNumber>"+MapUtil.getString(params,"SalesOrderNumber")+"</SalesOrderNumber>\n" +
+                "            <DataSource>"+MapUtil.getString(params,"DataSource")+"</DataSource>\n" +
+                "            <DataSourceDesc>"+MapUtil.getString(params,"DataSourceDesc")+"</DataSourceDesc>\n" +
+                "            <UserCode>"+MapUtil.getString(params,"UserCode")+"</UserCode>\n" +
+                "            <DeptCode>"+MapUtil.getString(params,"DeptCode")+"</DeptCode>\n" +
+                "            <UpdateUserDesc>"+MapUtil.getString(params,"UpdateUserDesc")+"</UpdateUserDesc>\n" +
+                "            <CheckoutCompanyCode>"+MapUtil.getString(params,"CheckoutCompanyCode")+"</CheckoutCompanyCode>\n" +
+                "            <CheckoutCompanyDesc>"+MapUtil.getString(params,"CheckoutCompanyDesc")+"</CheckoutCompanyDesc>\n" +
+                "            <ProjectNumber>"+MapUtil.getString(params,"ProjectNumber")+"</ProjectNumber>\n" +
+                "            <ProjectName>"+MapUtil.getString(params,"ProjectName")+"</ProjectName>\n" +
+                "            <BatchNumber>"+MapUtil.getString(params,"BatchNumber")+"</BatchNumber>\n" +
+                "            <HospitalCode>"+MapUtil.getString(params,"HospitalCode")+"</HospitalCode>\n" +
+                "            <ParentAccountDesc>"+MapUtil.getString(params,"ParentAccountDesc")+"</ParentAccountDesc>\n" +
+                "            <ParentAccountCode>"+MapUtil.getString(params,"ParentAccountCode")+"</ParentAccountCode>\n" +
+                "            <PATPatientName>"+MapUtil.getString(params,"PATPatientName")+"</PATPatientName>\n" +
+                "            <PATDob>"+MapUtil.getString(params,"PATDob")+"</PATDob>\n" +
+                "            <PATSexCode>"+MapUtil.getString(params,"PATSexCode")+"</PATSexCode>\n" +
+                "            <PATMaritalStatusCode>"+MapUtil.getString(params,"PATMaritalStatusCode")+"</PATMaritalStatusCode>\n" +
+                "            <CertificatesType>"+MapUtil.getString(params,"CertificatesType")+"</CertificatesType>\n" +
+                "            <PATIdentityNum>"+MapUtil.getString(params,"PATIdentityNum")+"</PATIdentityNum>\n" +
+                "            <PATTelephone>"+MapUtil.getString(params,"PATTelephone")+"</PATTelephone>\n" +
+                "            <BillStatus>"+MapUtil.getString(params,"BillStatus")+"</BillStatus>\n" +
+                "            <TotalAmount>"+MapUtil.getString(params,"TotalAmount")+"</TotalAmount>\n" +
+                "            <ValidStartDate>"+MapUtil.getString(params,"ValidStartDate")+"</ValidStartDate>\n" +
+                "            <OEORIInfoList>\n"+xml+"\n"+
+                "        </CreateAppointmentInfoRt>\n" +
+                "</Body>";
+        String dataSecret= MD5Util.EncodeByMD5(body+MD5Util.EncodeByMD5(body));
+
+        String header="<Request>\n" +
+                "    <Header>\n" +
+                "        <SourceSystem>platform</SourceSystem>\n" +
+                "        <MessageID></MessageID>\n" +
+                "        <DataSecret>"+dataSecret+"</DataSecret>\n" +
+                "        <RequestTime>"+DateUtil.getNow()+"</RequestTime>\n" +
+                "    </Header>\n" +
+                     body+
+                "</Request>" ;
+        String resultXml = this.sendWebService(header,"BOE0229");
+        OrderResponse orderResponse = XmlUtils.xmlToObject(OrderResponse.class, resultXml);
+        if( orderResponse==null){
+            return new JsonResponse(orderResponse);
+        }
+        if("0".equals(orderResponse.getBody().getResultCode())){
+            return new JsonResponse(orderResponse.getBody().getCreateAppointmentInfoRp().getAppointmentNumber());
+        }
+        return new JsonResponse(orderResponse.getBody().getResultCode(),orderResponse.getBody().getResultContent());
     }
 }

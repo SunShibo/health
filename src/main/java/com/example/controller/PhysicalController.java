@@ -1,17 +1,18 @@
 package com.example.controller;
 
 
-import com.example.domain.InformationReponse;
 import com.example.domain.JsonResponse;
-import com.example.domain.PatInfo;
 import com.example.domain.Physical;
+import com.example.domain.sub.Product;
+import com.example.domain.sub.ProductRequest;
 import com.example.service.PhysicalService;
+import com.example.service.ProduceService;
 import com.example.service.util.MapUtil;
+import com.example.service.util.XmlUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +24,8 @@ import java.util.Map;
 public class PhysicalController {
     @Autowired
     PhysicalService physicalService;
+    @Autowired
+    ProduceService produceService;
     /**
      * 查询历次体检记录
      * SourceSystem 信息来源
@@ -87,17 +90,41 @@ public class PhysicalController {
     @PostMapping("/consequence/information")
     public JsonResponse information(@RequestBody Map<String, Object> params) throws Exception {
 
-        if (params==null||params.get("TradeCode")==null|| params.get("HospitalCode")==null || params.get("UserCode")==null
-            || params.get("PATCardNum")==null  || params.get("PATPatientID")==null  || params.get("IdentityCardNo")==null
-        ){
+        if (params==null||params.get("TradeCode")==null|| params.get("HospitalCode")==null || params.get("UserCode")==null){
             return  JsonResponse.fail("参数异常");
         }
         return  new JsonResponse(physicalService.information(params));
     }
 
+
     @PostMapping("/test/test")
-    public JsonResponse test(){
-        PatInfo patInfo = new PatInfo();;
-        return  new JsonResponse(patInfo);
+    public JsonResponse test(@RequestBody Map<String, Object> params){
+        return physicalService.test(params);
     }
+
+    /**
+     * 获取预约单号
+     * @return
+     */
+    @PostMapping("/reservation/gain")
+    public JsonResponse reservation(@RequestBody Map<String, Object> params){
+        return physicalService.reservation(params);
+    }
+
+    /**
+     * 查询产品套餐
+     * @return
+     */
+    @PostMapping("/query/product")
+    public JsonResponse product(@RequestBody Map<String, Object> params){
+        if (params==null||params.get("hospitalCode")==null){
+            return  JsonResponse.fail("参数异常");
+        }
+        List<Product> products = produceService.queryProduct(MapUtil.getString(params,"hospitalCode"));
+        return new JsonResponse(products);
+    }
+
+
+
+
 }

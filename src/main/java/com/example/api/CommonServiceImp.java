@@ -3,6 +3,7 @@ package com.example.api;
 import com.alibaba.druid.util.StringUtils;
 import com.example.dao.ProjectDao;
 import com.example.domain.ResponseBuild;
+import com.example.domain.sub.ProductRequest;
 import com.example.receive.DivisionRequest;
 import com.example.receive.PersonnelRequest;
 import com.example.receive.ProjectRequest;
@@ -50,6 +51,8 @@ public class CommonServiceImp implements CommonService {
     @Resource
     private ProjectService projectService;
 
+    @Resource
+    private ProduceService produceService;
     @Override
     public String synPatient(String code, String param) {
         if(StringUtils.isEmpty(code) || StringUtils.isEmpty(param) ){
@@ -88,6 +91,12 @@ public class CommonServiceImp implements CommonService {
                 String rep = null;
                 ProjectRequest req = XmlUtils.xmlToObject(ProjectRequest.class, param);
                 rep = projectService.insertProject(req);
+                return rep;
+            }else if(code.equals("BOE0151")){
+                log.info("产品套餐推送");
+                String rep = null;
+                ProductRequest req = XmlUtils.xmlToObject(ProductRequest.class, param);
+                rep = produceService.insProduce(req);
                 return rep;
             }
             else{

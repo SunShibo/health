@@ -36,11 +36,11 @@ public class MapUtil {
 
     public static String getString(Map<String, Object> map, String key) {
         if (map == null) {
-            return null;
+            return "";
         } else {
             Object obj = map.get(key);
             if (obj == null) {
-                return null;
+                return "";
             } else {
                 return obj instanceof String ? (String) obj : String.valueOf(obj);
             }

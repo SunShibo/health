@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.ProduceDao">
+
+    <insert id="insertProduce"  keyProperty="id" useGeneratedKeys="true" >
+        INSERT INTO `product` ( `PRDProductID`, `PRDName`, `PRDGenericName`, `PRDAlias`,
+        `PRDDefaultUOMCode`, `PRDDefaultUOMDesc`, `PRDQuantityDecimal`, `PRDIndependentPricing`, `PRDCategoryCode`,
+         `PRDCategoryName`, `PRDSubCategoryCode`, `PRDSubCategoryDesc`, `PRDSpecification`, `PRDDosageforms`,
+          `PRDPackageType`, `PRDPackageBrief`, `PRDPackageSex`, `PRDPackageRange`, `PRDPackageLabelName`,
+           `PRDUsage`, `PRDBusinessUnitCode`, `PRDBusinessUnitDesc`, `PRDPrice`, `StrikePrice`,
+           `PRDStatus`, `PRDOwnLevel`, `PRDDeptCode`, `PRDDeptDesc`, `PRDProductLevel`,
+           `PRDIsSellSeparately`, `PRDDescription`,`SourceSystem`,`MessageID`) VALUES
+           (#{PRDProductID}, #{PRDName}, #{PRDGenericName} ,#{PRDAlias},
+            #{PRDDefaultUOMCode}, #{PRDDefaultUOMDesc}, #{PRDQuantityDecimal}, #{PRDIndependentPricing}, #{PRDCategoryCode},
+             #{PRDCategoryName}, #{PRDSubCategoryCode}, #{PRDSubCategoryDesc}, #{PRDSpecification}, #{PRDDosageforms},
+              #{PRDPackageType}, #{PRDPackageBrief}, #{PRDPackageSex}, #{PRDPackageRange}, #{PRDPackageLabelName},
+               #{PRDUsage}, #{PRDBusinessUnitCode}, #{PRDBusinessUnitDesc}, #{PRDPrice}, #{StrikePrice},
+               #{PRDStatus}, #{PRDOwnLevel}, #{PRDDeptCode}, #{PRDDeptDesc}, #{PRDProductLevel},
+               #{PRDIsSellSeparately}, #{PRDDescription},#{SourceSystem},#{MessageID})
+    </insert>
+    <insert id="insertProduceInfo"   keyProperty="id" useGeneratedKeys="true">
+         INSERT INTO product_info ( `p_id`, `AssProductID`, `AssQuantity`, `AssUOMCode`, `AssUOMCodeDesc`, `AssIsRequired`, `AssIntraPrice`)
+         VALUES (#{pId}, #{AssProductID}, #{AssQuantity}, #{AssUOMCode}, #{AssUOMCodeDesc}, #{AssIsRequired}, #{AssIntraPrice})
+    </insert>
+
+    <insert id="insertProduceProject">
+         INSERT INTO `product_relation_project` ( `p_id`, `OeoriTarId`, `OeoriTarQuantity`, `OeoriTarCode`, `OeoriTarDesc`, `OeoriTarPrice`, `OeoriTarIntraPrince`)
+                                             VALUES (#{pId}, #{OeoriTarId}, #{OeoriTarQuantity}, #{OeoriTarCode}, #{OeoriTarDesc}, #{OeoriTarPrice}, #{OeoriTarIntraPrince});
+    </insert>
+
+
+    <resultMap type="com.example.domain.sub.Product" id="ProductMap">
+        <result property="prdproductid" column="PRDProductID" jdbcType="VARCHAR"/>
+        <result property="prdname" column="PRDName" jdbcType="VARCHAR"/>
+        <result property="prdgenericname" column="PRDGenericName" jdbcType="VARCHAR"/>
+        <result property="prdalias" column="PRDAlias" jdbcType="VARCHAR"/>
+        <result property="prddefaultuomcode" column="PRDDefaultUOMCode" jdbcType="VARCHAR"/>
+        <result property="prddefaultuomdesc" column="PRDDefaultUOMDesc" jdbcType="VARCHAR"/>
+        <result property="prdquantitydecimal" column="PRDQuantityDecimal" jdbcType="VARCHAR"/>
+        <result property="prdindependentpricing" column="PRDIndependentPricing" jdbcType="VARCHAR"/>
+        <result property="prdcategorycode" column="PRDCategoryCode" jdbcType="VARCHAR"/>
+        <result property="prdcategoryname" column="PRDCategoryName" jdbcType="VARCHAR"/>
+        <result property="prdsubcategorycode" column="PRDSubCategoryCode" jdbcType="VARCHAR"/>
+        <result property="prdsubcategorydesc" column="PRDSubCategoryDesc" jdbcType="VARCHAR"/>
+        <result property="prdspecification" column="PRDSpecification" jdbcType="VARCHAR"/>
+        <result property="prddosageforms" column="PRDDosageforms" jdbcType="VARCHAR"/>
+        <result property="prdpackagetype" column="PRDPackageType" jdbcType="VARCHAR"/>
+        <result property="prdpackagebrief" column="PRDPackageBrief" jdbcType="VARCHAR"/>
+        <result property="prdpackagesex" column="PRDPackageSex" jdbcType="VARCHAR"/>
+        <result property="prdpackagerange" column="PRDPackageRange" jdbcType="VARCHAR"/>
+        <result property="prdpackagelabelname" column="PRDPackageLabelName" jdbcType="VARCHAR"/>
+        <result property="prdusage" column="PRDUsage" jdbcType="VARCHAR"/>
+        <result property="prdbusinessunitcode" column="PRDBusinessUnitCode" jdbcType="VARCHAR"/>
+        <result property="prdbusinessunitdesc" column="PRDBusinessUnitDesc" jdbcType="VARCHAR"/>
+        <result property="prdprice" column="PRDPrice" jdbcType="VARCHAR"/>
+        <result property="strikeprice" column="StrikePrice" jdbcType="VARCHAR"/>
+        <result property="prdstatus" column="PRDStatus" jdbcType="VARCHAR"/>
+        <result property="prdownlevel" column="PRDOwnLevel" jdbcType="VARCHAR"/>
+        <result property="prddeptcode" column="PRDDeptCode" jdbcType="VARCHAR"/>
+        <result property="prddeptdesc" column="PRDDeptDesc" jdbcType="VARCHAR"/>
+        <result property="prdproductlevel" column="PRDProductLevel" jdbcType="VARCHAR"/>
+        <result property="prdissellseparately" column="PRDIsSellSeparately" jdbcType="VARCHAR"/>
+        <result property="prddescription" column="PRDDescription" jdbcType="VARCHAR"/>
+        <result property="sourcesystem" column="SourceSystem" jdbcType="VARCHAR"/>
+        <result property="messageid" column="MessageID" jdbcType="VARCHAR"/>
+        <collection property="ProductInfo" ofType="com.example.domain.sub.ProductInfo">
+            <result property="assproductid" column="AssProductID" />
+            <result property="assquantity" column="AssQuantity" />
+            <result property="assuomcode" column="AssUOMCode" />
+            <result property="assuomcodedesc" column="AssUOMCodeDesc" />
+            <result property="assisrequired" column="AssIsRequired" />
+            <result property="assintraprice" column="AssIntraPrice" />
+            <collection property="tarList" ofType="com.example.domain.sub.ProductRelationProject" >
+                <result property="oeoritarid" column="OeoriTarId" />
+                <result property="oeoritarquantity" column="OeoriTarQuantity" />
+                <result property="oeoritarcode" column="OeoriTarCode" />
+                <result property="oeoritardesc" column="OeoriTarDesc" />
+                <result property="oeoritarprice" column="OeoriTarPrice" />
+                <result property="oeoritarintraprince" column="OeoriTarIntraPrince" />
+            </collection>
+        </collection>
+
+    </resultMap>
+
+
+
+    <select id="queryProduct" resultMap="ProductMap">
+        SELECT * FROM product p LEFT JOIN product_info info ON info.p_id=p.id LEFT JOIN product_relation_project ct ON ct.p_id=info.id where
+        PRDBusinessUnitCode =#{hospitalCode}
+    </select>
+
+</mapper>
